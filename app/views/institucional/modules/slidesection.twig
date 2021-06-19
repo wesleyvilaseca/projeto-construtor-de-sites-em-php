@@ -1,0 +1,50 @@
+{% if slide %}
+	<section id="">
+		<div id="{{slide.id}}" class="carousel slide" data-bs-ride="carousel">
+			{% set i = 0 %}
+			<div class="carousel-indicators">
+				{% for indicators in slide.conteudo %}
+					{% if  i == 0 %}
+						<button type="button" data-bs-target="#{{slide.id}}" data-bs-slide-to="{{i}}" aria-label="Slide {{i}}" aria-current="true" class="active"></button>
+					{% else %}
+						<button type="button" data-bs-target="#{{slide.id}}" data-bs-slide-to="{{i}}" aria-label="Slide {{i}}"></button>
+					{% endif %}
+					{% set i = i + 1 %}
+				{% endfor %}
+			</div>
+			<div class="carousel-inner">
+				{% set i = 1 %}
+				{% for conteudo in slide.conteudo %}
+					{% if i == 1 %}
+						<div class="carousel-item active">
+							<img src="{{URL_BASE_IMAGE ~ conteudo.image}}" class="d-block w-100" alt="{{i}}">
+							{% if conteudo.description %}
+								<div class="carousel-caption d-none d-md-block">
+									{{ conteudo.description | raw }}
+								</div>
+							{% endif %}
+						</div>
+					{% else %}
+						<div class="carousel-item">
+							<img src="{{URL_BASE_IMAGE ~ conteudo.image}}" class="d-block w-100" alt="{{i}}">
+							{% if conteudo.description %}
+								<div class="carousel-caption d-none d-md-block">
+									{{ conteudo.description | raw }}
+								</div>
+							{% endif %}
+						</div>
+					{% endif %}
+					{% set i = i + 1 %}
+				{% endfor %}
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#{{slide.id}}" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#{{slide.id}}" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</section>
+{% endif %}

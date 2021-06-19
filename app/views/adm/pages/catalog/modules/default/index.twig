@@ -1,0 +1,19 @@
+{% extends './adm/template.twig' %}
+{% block body %}
+	{{topbar | raw}}
+	{{sidemenu | raw}}
+
+	<div align="right">
+		{% if actionadd %}
+			<a class="btn btn-primary btn-sm" href="{{actionadd}}" title="novo">
+				<i class="fas fa-plus"></i>
+			</a>
+		{% endif %}
+		<a class="btn btn-secondary btn-sm" href="{{back}}" title="voltar">
+			<i class="fa fa-reply"></i>
+		</a>
+	</div>
+
+	{{tablelist | raw}}
+	{{js | raw}}
+{% endblock %}

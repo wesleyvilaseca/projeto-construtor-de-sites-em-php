@@ -1,0 +1,54 @@
+{% extends './adm/template.twig' %}
+{% block body %}
+	{{topbar | raw}}
+	{{sidemenu | raw}}
+	<div align="right">
+		<a class="btn btn-primary btn-sm" href="{{addroute}}">
+			<i class="fas fa-plus"></i>
+		</a>
+		<a class="btn btn-secondary btn-sm" href="{{back}}">
+			<i class="fa fa-reply"></i>
+		</a>
+	</div>
+	<div class="col-xl-12 col-md-12 col-sm-12">
+		<div class="">
+			<div class="info-title-table" align="center">Imagens</div>
+			{% if images == true %}
+				<div class="info-body-table">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Filtro</th>
+									<th scope="col">Imagem</th>
+									<th scope="col">Ação</th>
+								</tr>   
+							</thead>
+							<tbody>
+								{% for image in images %}
+									<tr>
+										<td>{{image.image_filter}}</td>
+										<td><img src="{{URL_BASE_IMAGE ~ image.image}}" width="100px"></td>
+										<td>
+											<a class="btn btn-info btn-sm" href="{{editroute}}{{image.id}}">
+												<i class="fas fa-pencil-alt"></i>
+											</a>
+											<a class="btn btn-danger btn-sm" href="{{deleteroute}}{{image.id}}">
+												<i class="far fa-trash-alt"></i>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			{% else %}
+				<h5 align="center">
+					Não há registros
+				</h5>
+			{% endif %}
+		</div>
+	</div>
+	{{js | raw}}
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends './adm/template.twig' %}
+{% block body %}
+	{{topbar | raw}}
+	{{sidemenu | raw}}
+	<div align="right">
+		<a class="btn btn-primary btn-sm" href="{{addroute}}">
+			<i class="fas fa-plus"></i>
+		</a>
+	</div>
+	<div class="col-xl-12 col-md-12 col-sm-12">
+		<div class="">
+			<div class="info-title-table" align="center">Páginas</div>
+			{% if paginas == true %}
+				<div class="info-body-table">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Descrição</th>
+									<th scope="col">Situação</th>
+									<th scope="col">Ação</th>
+									<th scope="col">Layout</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for pagina in paginas %}
+									<tr>
+										<td>{{pagina.description}}</td>
+										<td>{{pagina.enable == 'S' ? 'Ativo' : 'Inativo' }}</td>
+										<td>
+											<a class="btn btn-info btn-sm" href="{{editroute}}{{pagina.id}}">
+												<i class="fas fa-pencil-alt"></i>
+											</a>
+											<a class="btn btn-danger btn-sm" href="{{deleteroute}}{{pagina.id}}">
+												<i class="far fa-trash-alt"></i>
+											</a>
+										</td>
+										<td>
+											{% if pagina.enable == 'S' %}
+												<a class="btn btn-outline-dark btn-sm" href="{{layoutroute}}{{pagina.id}}">
+													<i class="far fa-object-group"></i>
+												</a>
+											{% else %}
+												<a class="btn btn-outline-dark btn-sm disabled" href="#">
+													<i class="far fa-object-group"></i>
+												</a>
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			{% else %}
+				<h5 align="center">
+					Não há registros
+				</h5>
+			{% endif %}
+		</div>
+	</div>
+	{{js | raw}}
+{% endblock %}

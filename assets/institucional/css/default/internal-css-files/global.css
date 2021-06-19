@@ -1,0 +1,61 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+
+a {
+  color: var(--primary);
+}
+
+a:hover {
+  color: var(--secondary);
+}
+
+.title {
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: var(--medium) !important;
+  font-weight: 400;
+}
+
+.block {
+  margin-bottom: 120px;
+}
+
+.button {
+  text-transform: lowercase;
+  font-weight: 500;
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+}
+
+.button-primary {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.button-primary:hover {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+}
+
+.button-primary-outline {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+.button-primary-outline:hover {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: var(--primary) !important;
+}

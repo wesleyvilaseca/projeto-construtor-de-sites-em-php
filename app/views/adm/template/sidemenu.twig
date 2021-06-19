@@ -1,0 +1,52 @@
+<nav id="sidebar" class="sidebar-wrapper">
+	<div class="sidebar-content">
+		<div class="sidebar-brand">
+			<img src="" alt="">
+			<a href="#">Administração</a>
+			<div id="close-sidebar">
+				<i class="fas fa-times"></i>
+			</div>
+		</div>
+		<div class="sidebar-header">
+			<div class="sidebar-menu">
+				<ul id="sitemaps">
+					<li class="header-menu">
+						<span>Navegação</span>
+					</li>
+					{% if menus %}
+						{% for menu in menus %}
+							{% if menu.children %}
+								<li class="sidebar-dropdown {{ menuparantkey == menu.menuid ? 'active_side' : '' }}">
+									<a>
+										{% if menu.icon %}
+											<i class="{{menu.icon}}"></i>
+										{% endif %}
+										<span>{{menu.name}}</span>
+									</a>
+                                    <div class="sidebar-submenu {{menuparantkey == menu.menuid ? 'd-block' : '' }}">
+										<ul>
+											{% for submenu in menu.children %}
+												<li class="{{ submenu.menuid == current_menuid ? 'ativo' : '' }}">
+													<a href="{{submenu.url}}">{{submenu.name}}</a>
+												</li>
+											{% endfor %}
+										</ul>
+									</div>
+								</li>
+							{% else %}
+								<li class="{{ menu.menuid == current_menuid ? 'ativo' : '' }}">
+									<a href="{{menu.url}}">
+										{% if menu.icon %}
+											<i class="{{menu.icon}}"></i>
+										{% endif %}
+										<span>{{menu.name}}</span>
+									</a>
+								</li>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
+	{{js | raw}}

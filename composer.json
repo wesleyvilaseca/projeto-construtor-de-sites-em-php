@@ -1,0 +1,28 @@
+{
+    "name": "wesley.vilaseca/projetocmsphp",
+    "description": "sistema php padrão institucional e blog com criação de páginas dinâmica",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Wesley Vila Seca Sanches",
+            "email": "wesley.vilaseca@hotmail.com",
+            "role": "Developer"
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "require": {
+        "twig/twig": "^3.1",
+        "coffeecode/datalayer": "1.1.*",
+        "coffeecode/uploader": "1.0.*",
+        "coffeecode/paginator": "^1.0",
+        "naucon/htmlbuilder": "^1.0"
+    }
+}

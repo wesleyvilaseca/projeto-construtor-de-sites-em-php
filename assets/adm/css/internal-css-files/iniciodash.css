@@ -1,0 +1,117 @@
+.info-grafico {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.info-title {
+    height: 30px;
+    font-size: 20px;
+    line-height: 30px;
+    padding-left: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.info-body {
+    padding-top: 10px;
+}
+
+.info-table {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.info-title-table {
+    height: 60px;
+    font-size: 20px;
+    line-height: 60px;
+    border-bottom: 1px solid #ccc;
+}
+
+.info-body-table {
+    padding-top: 0px;
+}
+
+/*cards*/
+
+.card {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(26, 54, 126, 0.125);
+    border-radius: .25rem
+}
+
+.card-content {
+    padding: 1rem;
+    flex-direction: row !important;
+    align-items: center;
+    z-index: -1 !important;
+}
+
+.card-content .card-content-wrapper {
+    display: flex;
+    flex: 1;
+    position: relative;
+    align-items: center
+}
+
+.card-content .card-numbers {
+    font-weight: bold;
+    font-size: 1.8rem;
+    display: block
+}
+
+.card-content .card-content-right {
+    margin-left: auto
+}
+
+.card-content .card-content-left .card-heading {
+    opacity: .8;
+    font-weight: bold
+}
+
+.card-content .card-content-left .card-subheading {
+    opacity: .5
+}
+
+.text-white {
+    color: #fff !important
+}
+
+.card-content .card-content-left .card-heading {
+    opacity: .8;
+    font-weight: bold;
+}
+
+.card-content .card-content-left .card-subheading {
+    opacity: .5;
+}
+
+.bg-midnight-bloom {
+    background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%) !important
+}
+
+.bg-grow-early {
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%) !important
+}
+
+.bg-premium-dark {
+    background-image: linear-gradient(to right, #434343 0%, black 100%) !important
+}
+
+/*@media screen and (max-width: 760px){
+    main {
+        display: block;
+        height: 100%;
+        background-color: #f7f7f7;
+        width: calc(100%);
+        z-index: 1;
+        position: relative;
+    }
+}*/

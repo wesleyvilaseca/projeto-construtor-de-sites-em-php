@@ -1,0 +1,55 @@
+<nav id="sidebar" class="sidebar-wrapper">
+	<div class="sidebar-content">
+		<div class="sidebar-brand">
+			<img src="" alt="">
+			<a href="#">Administração</a>
+			<div id="close-sidebar">
+				<i class="fas fa-times"></i>
+			</div>
+		</div>
+		<div class="sidebar-header">
+			<div class="sidebar-menu">
+				<ul id="sitemaps">
+					<li class="header-menu">
+						<span>Navegação</span>
+					</li>
+					<li class="{{ currentUrl == url ? 'ativo' : '' }}">
+						<a href="#">
+							<i class="fas fa-tachometer-alt"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>
+					<li class="sidebar-dropdown {{ desing ? 'active_side' : '' }}">
+						<a href="#">
+							<i class="fab fa-buromobelexperte"></i>
+							<span>Modulos</span>
+						</a>
+						<div class="sidebar-submenu" {{ layout ? "style='display:block;'" : '' }}>
+							<ul>
+								<li class="{{ layout ? 'ativo' : '' }}">
+									<a href="{{URL_BASE}}admin-modules">modulos</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="sidebar-dropdown {{ desing ? 'active_side' : '' }}">
+						<a href="#">
+							<i class="fas fa-tv"></i>
+							<span>Design</span>
+						</a>
+						<div class="sidebar-submenu" {{ layout ? "style='display:block;'" : '' }}>
+							<ul>
+								<li class="{{ layout ? 'ativo' : '' }}">
+									<a href="#">Layout</a>
+								</li>
+								<li class="{{ layout ? 'ativo' : '' }}">
+									<a href="#">Banners</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	{{js | raw}}

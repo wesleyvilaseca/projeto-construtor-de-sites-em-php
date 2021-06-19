@@ -1,0 +1,41 @@
+/*contentpage*/
+
+@media screen and (max-width: 960px) {
+    .title-page-content {
+        width: 100%;
+    }
+    .title-50 {
+        width: 100%;
+    }
+    .title-80 {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .img-empresa label {
+        margin-left: 0px;
+    }
+}
+
+/*funcionamento do estabelecimento*/
+@media screen and (max-width: 760px) {
+    h5 {
+        font-size: 1rem;
+    }
+    .input {
+        padding-top: none;
+    }
+
+    .top-fantasia {
+        font-size: .8rem;
+    }
+
+    .titulo-tab {
+        font-size: .9rem;
+    }
+
+    .image-inputfile{
+       max-width: 200px !important;    
+    }
+}

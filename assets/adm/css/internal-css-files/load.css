@@ -1,0 +1,32 @@
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba( 255, 255, 255, .8) url(../../global/gif/carregando.gif) 50% 50% no-repeat;
+    background-size: 100px;
+}
+
+.modal:-moz-loading {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba( 255, 255, 255, .8) url(../../global/gif/carregando.gif) 50% 50% no-repeat;
+    background-size: 100px;
+}
+
+body.loading {
+    overflow: hidden;
+}
+
+body.loading .modal {
+    display: block;
+    z-index: 1 !important;
+}

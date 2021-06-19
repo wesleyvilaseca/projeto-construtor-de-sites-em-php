@@ -1,0 +1,106 @@
+{% extends './adm/template.twig' %}
+{% block body %}
+
+	{% for content in html %}
+		{{ content | raw }}
+	{% endfor %}
+    
+	<div class="row">        
+		<div class="col-md-12 col-xl-4">
+			<div class="card mb-3 card-content bg-premium-dark">
+				<div class="card-content-wrapper text-white">
+					<div class="card-content-left">
+						<div class="card-heading">Total Vendido</div>
+						<div class="card-subheading">para este mês</div>
+					</div>
+					<div class="card-content-right">
+						<div class="card-numbers text-white">
+							<span>R$ 2.568,00</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 col-xl-4">
+			<div class="card mb-3 card-content bg-midnight-bloom">
+				<div class="card-content-wrapper text-white">
+					<div class="card-content-left">
+						<div class="card-heading">Total Pedidos</div>
+						<div class="card-subheading">para este mês</div>
+					</div>
+					<div class="card-content-right">
+						<div class="card-numbers text-white">
+							<span>200</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 col-xl-4">
+			<div class="card mb-3 card-content bg-grow-early">
+				<div class="card-content-wrapper text-white">
+					<div class="card-content-left">
+						<div class="card-heading">Total clientes</div>
+						<div class="card-subheading">pessoas cadastradas</div>
+					</div>
+					<div class="card-content-right">
+						<div class="card-numbers text-white">
+							<span>183</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+	<div class="row">
+		<div class="col-xl-4 col-md-12 col-sm-12">
+			<div class="info-grafico">
+				<div class="info-title">Status pedidos</div>
+				<div class="info-body" style="height:300px;">
+					<canvas id="rel2"></canvas>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-8 col-md-12 col-sm-12">
+			<div class="info-grafico">
+				<div class="info-title">Gráfico de vendas dos ultimos 30 dias</div>
+				<div class="info-body" style="height:300px;">
+					<canvas id="rel1"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-2">
+		<div class="col-xl-12 col-md-12 col-sm-12">
+			{#<div class="info-table">
+			<div class="info-title-table" align="center">Ultimos pedidos</div>#}
+			{#<div class="info-body-table">#}
+				<div class="table-responsive"> <table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">nome</th>
+							<th scope="col">bairro</th>
+							<th scope="col">status</th>
+							<th scope="col">ação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>@mdo</td>
+							<td>@mdo</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			{#</div>#}
+			{#</div>#}
+		</div>
+	</div>
+	{{js | raw}}
+{% endblock %}

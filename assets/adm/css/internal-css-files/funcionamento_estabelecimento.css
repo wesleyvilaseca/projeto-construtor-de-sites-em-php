@@ -1,0 +1,41 @@
+.botao-editar button {
+    width: 50%;
+}
+
+.titulo-tab {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.descricao-check-tab {
+    font-size: 14px;
+}
+
+.line {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: 1px solid #007bff;
+}
+
+.select_dia_semana_form, .select_cidade {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.table .thead-success th {
+    color: #fff;
+    background-color: #28a745 !important;
+}
+
+.table .thead-info th {
+    color: #fff;
+    background-color: #17a2b8 !important;
+}
+
+.teste {
+    text-align: center;
+}
+
+.teste img {
+    max-width: 200px;
+}

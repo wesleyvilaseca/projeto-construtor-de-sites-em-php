@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="sistemaphp">
+
+		<link
+		rel="icon" href="{{URL_BASE}}assets/global/icons/icone.ico" type="image/x-icon">
+
+		<!--css sidebar-->
+		<link
+		href="{{URL_BASE}}assets/adm/css/all.css" rel="stylesheet">
+
+		<!-- sweet alert-->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.1/dist/sweetalert2.all.min.js"></script>
+
+		<!--jquery-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+			var base_url = '{{ URL_BASE }}';
+		</script>
+		<title>{{title}}</title>
+	</head>
+
+	<body>
+		<div id="side-menu" class="page-wrapper chiller-theme toggled">
+			<a id="show-sidebar" class="btn btn-sm btn-dark" style="cursor:pointer;">
+				<i class="fas fa-bars"></i>
+			</a>
+			{#{% include './adm/template/topbar.twig' %}#}
+			{#{% include './adm/template/sidemenu.twig' %}#}
+			<main class="page-content">
+				<div class="container-fluid">
+					{% include './adm/template/alerts.twig' %}
+					{% if toptitle %}
+						<h5>{{toptitle}}</h5>
+					{% endif %}
+					{% if breadcrumb %}
+						<div id="breadcrumb" class="mt-2">
+							<ol class="breadcrumb">
+								{% for bread in breadcrumb %}
+									{% if bread.active %}
+										<li class="breadcrumb-item active">
+											{{bread.title}}
+										</li>
+									{% else %}
+										<li class="breadcrumb-item">
+											<a href="{{bread.route}}">{{bread.title}}</a>
+										</li>
+									{% endif %}
+								{% endfor %}
+							</ol>
+						</div>
+					{% endif %}
+					{#<hr>#}
+					{% block body %}{% endblock %}
+				</div>
+			</main>
+			<div class="modal"></div>
+		</div>
+	</body>
+</html>
+<!-- default js -->
+<script src="{{ URL_BASE }}assets/global/js/rotina.js"></script>

@@ -1,0 +1,12 @@
+{% extends './adm/template.twig' %}
+{% block body %}
+	{{topbar | raw}}
+	{{sidemenu | raw}}
+	<div align="right">
+		<a class="btn btn-secondary btn-sm" href="{{back}}">
+			<i class="fa fa-reply"></i>
+		</a>
+	</div>
+	{{form | raw}}
+		{{js | raw}}
+	{% endblock %}

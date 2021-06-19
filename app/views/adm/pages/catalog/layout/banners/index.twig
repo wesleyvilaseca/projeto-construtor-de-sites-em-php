@@ -1,0 +1,64 @@
+{% extends './adm/template.twig' %}
+{% block body %}
+	{{topbar | raw}}
+	{{sidemenu | raw}}
+	<div align="right">
+		<a class="btn btn-primary btn-sm" href="{{addroute}}">
+			<i class="fas fa-plus"></i>
+		</a>
+	</div>
+	<div class="col-xl-12 col-md-12 col-sm-12">
+		<div class="">
+			<div class="info-title-table" align="center">Banners</div>
+			{% if banners == true %}
+				<div class="info-body-table">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Descrição</th>
+									<th scope="col">Situação</th>
+									<th scope="col">Ação</th>
+									<th scope="col">Images</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for banner in banners %}
+									<tr>
+										<td>{{banner.description}}</td>
+										<td>{{banner.enable == 'S' ? 'Ativo' : 'Inativo' }}</td>
+										<td>
+											<a class="btn btn-info btn-sm" href="{{editroute}}{{banner.id}}">
+												<i class="fas fa-pencil-alt"></i>
+											</a>
+											<a class="btn btn-danger btn-sm" href="{{deleteroute}}{{banner.id}}">
+												<i class="far fa-trash-alt"></i>
+											</a>
+										</td>
+										<td>
+											{% if banner.gallery == "N" %}
+												<a class="btn btn-dark btn-sm" href="{{URL_BASE}}admin-catalog-bannerImage/index/{{banner.id}}">
+													<i class="fas fa-camera"></i>
+												</a>
+											{% else %}
+												<a class="btn btn-dark btn-sm" href="{{URL_BASE}}admin-catalog-imageGallery/index/{{banner.id}}">
+													<i class="fas fa-camera"></i>
+												</a>
+											{% endif %}
+
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			{% else %}
+				<h5 align="center">
+					Não há registros
+				</h5>
+			{% endif %}
+		</div>
+	</div>
+	{{js | raw}}
+{% endblock %}

@@ -1,0 +1,159 @@
+.modal-back {
+    background: rgba( 255, 255, 255, .8);
+}
+
+.title-page-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /*border: 1px solid red;*/
+}
+
+.title-50 {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-80 {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-100 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-top {
+    text-align: right;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+}
+
+.btn-100 {
+    min-width: 100px !important;
+}
+
+.border_inputerror {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgb(226 12 12 / 59%) !important;
+}
+
+.asterisco {
+    font-size: 15px;
+    padding-left: 5px;
+    color: #dc3545;
+}
+
+.img-preview {
+    width: 300px;
+    min-height: 100px;
+    margin-top: 10px;
+    /*border: 2px solid #dddddd;*/
+    /*defalt text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.img-preview-img {
+    display: none;
+    width: 50%;
+}
+
+#teste {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.img-empresa label {
+    margin-left: 20px;
+}
+
+#pesq-subgrupo {
+    display: none;
+}
+
+.precovendaProdutoTabela {
+    display: flex;
+    flex-direction: row;
+}
+
+.iconEmpromocao, .iconComdesconto {
+    width: 25px;
+    margin-right: 5px;
+}
+
+.iconEmpromocao img, .iconComdesconto img {
+    width: 20px;
+}
+
+.oldprice {
+    padding-top: 5px;
+    padding-left: 10px;
+    font-size: .9rem;
+    text-decoration: line-through;
+}
+
+.left0 {
+    padding-right: 0px !important;
+}
+
+.select2-selection__rendered {
+    line-height: 38px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 38px !important;
+}
+
+.select2-selection__arrow {
+    height: 38px !important;
+}
+
+/*.select2-container--default .select2-selection--multiple {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    cursor: text;
+    height: 50px !important;
+    line-height: 50px !important;
+}*/
+
+.t {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.zindex-1 {
+    z-index: -1 !important;
+}
+
+.v-center {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tox-dialog__disable-scroll .tox-dialog{
+    z-index: 2 !important;
+}

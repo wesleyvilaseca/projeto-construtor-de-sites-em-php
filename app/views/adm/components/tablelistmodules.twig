@@ -1,0 +1,35 @@
+<div class="col-xl-12 col-md-12 col-sm-12">
+	<div class="">
+		{% if itens == false  %}
+			<h5 align="center">
+				Não há registros
+			</h5>
+		{% else %}
+			<div class="info-body-table">
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">Descrição</th>
+								<th scope="col">Ação</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in itens %}
+								<td>{{item.description}}</td>
+								<td>
+									<a class="btn btn-success btn-sm" href="{{action}}edit/{{item.id}}">
+										<i class="fas fa-pencil-alt"></i>
+									</a>
+									<a class="btn btn-danger btn-sm" href="{{action}}remove/{{item.id}}">
+										<i class="far fa-trash-alt"></i>
+									</a>
+								</td>
+							</tbody>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	{% endif %}
+</div>

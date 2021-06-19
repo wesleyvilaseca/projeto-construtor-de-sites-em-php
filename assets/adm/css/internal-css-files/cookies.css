@@ -1,0 +1,27 @@
+.cookies-container {
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 2rem;
+    z-index: 1000;
+    padding: 10px;
+}
+
+.cookies-content {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    background: rgba(64,64,64,.9);
+    max-width: 700px;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.cookies-content p {
+    font-size: .8rem;
+}
+
+.cookies-content a {
+    cursor: pointer;
+    font-weight: 500;
+    border-bottom: 1px solid #fff;
+}

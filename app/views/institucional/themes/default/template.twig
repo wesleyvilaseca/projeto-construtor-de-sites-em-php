@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="DelphosAutomacao">
+
+		<link
+		rel="icon" href="{{URL_BASE}}assets/global/icons/icone.ico" type="image/x-icon">
+
+		<!-- Font Awesome -->
+		<link
+		rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+		<!--css institucional-->
+		<link href="{{URL_BASE}}assets/institucional/css/default/all.css" rel="stylesheet">
+
+		<!-- sweet alert-->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.1/dist/sweetalert2.all.min.js"></script>
+
+		<!--jquery-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+			var base_url = '{{ URL_BASE }}';
+		</script>
+		<title>{{title}}</title>
+	</head>
+
+	<body>
+		<div class="modal"></div>
+		<div
+			class="">
+			{% include './institucional/themes/default/alerts.twig' %}
+			{% if toptitle %}
+				<h5>{{toptitle}}</h5>
+			{% endif %}
+
+			{% if breadcrumb %}
+				<div id="breadcrumb" class="mt-2">
+					<ol class="breadcrumb">
+						{% for bread in breadcrumb %}
+							{% if bread.active %}
+								<li class="breadcrumb-item active">
+									{{bread.title}}
+								</li>
+							{% else %}
+								<li class="breadcrumb-item">
+									<a href="{{bread.route}}">{{bread.title}}</a>
+								</li>
+							{% endif %}
+						{% endfor %}
+					</ol>
+				</div>
+			{% endif %}
+			{#<hr>#}
+			{% block body %}{% endblock %}
+		</div>
+	</body>
+</html>
+<!-- default js -->
+<script src="{{ URL_BASE }}assets/global/js/rotina.js"></script>
