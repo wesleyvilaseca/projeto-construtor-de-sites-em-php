@@ -41,7 +41,8 @@ class DefaultsectionController extends Controller
         $dados['sidemenu']          = $this->load()->controller('admin-common-sidemenu', ['admin-catalog-modules']);
         $dados['tablelist']         = $this->load()->controller('admin-components-tablelistmodules', [
             [
-                'lista'         => $this->repository->find('module_code =:module_code', "module_code={$this->module_code}")->fetch(true)
+                'lista'         => $this->repository->find('module_code =:module_code', "module_code={$this->module_code}")->fetch(true),
+                'actionroute'   => $this->route
             ]
         ]);
         $view                       = 'adm/pages/catalog/modules/default/index';
@@ -132,10 +133,12 @@ class DefaultsectionController extends Controller
         if (!$item)
             redirectBack();
 
-        $request    = $_POST;
-        if (isset($request))
-            $request = filterpost($request);
+        $request            = $_POST;
+        $text               = $request['text'];
 
+        if (isset($request)) $request = filterpost($request);
+
+        $request['text']    = $text;
         $item->description  = $request['description'];
         $item->enable       = $request['enable'];
         $item->settings     = module_settings($request);
@@ -173,17 +176,17 @@ class DefaultsectionController extends Controller
         $enable = new Combo('enable', $action == 'delete' ? false : true);
         $enable->addItems(['S' => 'Ativo', 'N' => 'Inativo']);
 
-        $form->addField($description,   ['label' => 'Descrição *', 'css' =>'mb-4']);
-        $form->addField($image,         ['label' => 'Imagem para o bloco *','css' => 'mb-4']);
-        $form->addField($text,          ['label' => 'Conteudo *', 'css' => 'mb-4','editor' => $editor = true]);
-        $form->addField($image_position,['label' => 'Qual a posição da imagem? *','css' => 'mb-4']);
-        $form->addField($enable,        ['label' => 'Situcação *','css' => 'mb-4']);
+        $form->addField($description,   ['label' => 'Descrição *', 'css' => 'mb-4']);
+        $form->addField($image,         ['label' => 'Imagem para o bloco *', 'css' => 'mb-4']);
+        $form->addField($text,          ['label' => 'Conteudo *', 'css' => 'mb-4', 'editor' => $editor = true]);
+        $form->addField($image_position, ['label' => 'Qual a posição da imagem? *', 'css' => 'mb-4']);
+        $form->addField($enable,        ['label' => 'Situcação *', 'css' => 'mb-4']);
 
         if ($data) {
             $form->addAction($buttonlabel, (object)['css' => 'btn btn-success', 'route' => $this->route . $action . '/' . $data->id, 'submit' => true]);
             $form->setData(dataModule($data));
         } else {
-            $form->addAction($buttonlabel, (object)['css' => 'btn btn-success','route' => $this->route . $action, 'submit' => true]);
+            $form->addAction($buttonlabel, (object)['css' => 'btn btn-success', 'route' => $this->route . $action, 'submit' => true]);
         }
         return  $form->getForm();
     }
@@ -195,5 +198,4 @@ class DefaultsectionController extends Controller
         $js .= $this->tinyEditorActive();
         return $js;
     }
-
 }

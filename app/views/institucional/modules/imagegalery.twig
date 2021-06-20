@@ -1,107 +1,62 @@
-<!--SERVICOS-->
-<div id="servicos" class="block">
+<div id="{{idgallery}}" class="block servicos">
 	<div class="container">
-		<h2 class="title text-center">Serviços Recentes</h2>
-		<h4 class="subtitle text-center mb-4">
-			Et sumi kapa namur aondeai rocus pocus
-		</h4>
+		<h2 class="title text-center">{{title}}</h2>
+		<h4 class="subtitle text-center mb-4">{{subtitle}}</h4>
 
 		<div class="button-group">
 			<button type="button" class="active" data-filter="*" id="btn-all">
 				Todos
 			</button>
-			<button type="button" data-filter=".website">Website</button>
-			<button type="button" data-filter=".email">Email</button>
-			<button type="button" data-filter=".apps">Apps</button>
-			<button type="button" data-filter=".graficos">Gráficos</button>
+			{% for main in filters %}
+				<button type="button" data-filter=".{{main}}">{{main}}</button>
+			{% endfor %}
 		</div>
 
 		<div class="row grid">
-			<div class="col-lg-4 col-6 mb-4 element-item website apps">
-				<a href="{{URL_BASE}}assets/institucional/images/servicos/1.jpg" class="popup-link">
-					<img src="{{URL_BASE}}assets/institucional/images/servicos/1.jpg" class="img-fluid mb-2"/>
-				</a>
-				<h5 class="text-uppercase mb-1">Lorem ipsun</h5>
-				<p class="mb-0">
-					<span class="badge bg-light text-dark">Website</span>
-					<span class="badge bg-light text-dark">Apps</span>
-				</p>
-			</div>
-			<div class="col-lg-4 col-6 mb-4 element-item email">
-				<a href="{{URL_BASE}}assets/institucional/images/servicos/2.jpg" class="popup-link">
-					<img src="{{URL_BASE}}assets/institucional/images/servicos/2.jpg" class="img-fluid mb-2"/>
-				</a>
-				<h5 class="text-uppercase">Lorem ipsun</h5>
-				<p class="mb-0 tags">
-					<span class="badge bg-light text-dark">Email</span>
-				</p>
-			</div>
-			<div class="col-lg-4 col-6 mb-4 element-item apps">
-				<a href="{{URL_BASE}}assets/institucional/images/servicos/3.jpg" class="popup-link">
-					<img src="{{URL_BASE}}assets/institucional/images/servicos/3.jpg" class="img-fluid mb-2"/>
-				</a>
-				<h5 class="text-uppercase">Lorem ipsun</h5>
-				<p class="mb-0 tags">
-					<span class="badge bg-light text-dark">Apps</span>
-				</p>
-			</div>
-			<div class="col-lg-4 col-6 mb-4 element-item apps">
-				<a href="{{URL_BASE}}assets/institucional/images/servicos/4.jpg" class="popup-link">
-					<img src="{{URL_BASE}}assets/institucional/images/servicos/4.jpg" class="img-fluid mb-2"/>
-				</a>
-				<h5 class="text-uppercase">Lorem ipsun</h5>
-				<p class="mb-0 tags">
-					<span class="badge bg-light text-dark">Apps</span>
-				</p>
-			</div>
-			<div class="col-lg-4 col-6 mb-4 element-item email">
-				<a href="{{URL_BASE}}assets/institucional/images/servicos/5.jpg" class="popup-link">
-					<img src="{{URL_BASE}}assets/institucional/images/servicos/5.jpg" class="img-fluid mb-2"/>
-				</a>
-				<h5 class="text-uppercase">Lorem ipsun</h5>
-				<p class="mb-0 tags">
-					<span class="badge bg-light text-dark">Email</span>
-				</p>
-			</div>
-			<div class="col-lg-4 col-6 mb-4 element-item apps graficos">
-				<a href="{{URL_BASE}}assets/institucional/images/servicos/6.jpg" class="popup-link">
-					<img src="{{URL_BASE}}assets/institucional/images/servicos/6.jpg" class="img-fluid mb-2"/>
-				</a>
-				<h5 class="text-uppercase">Lorem ipsun</h5>
-				<p class="mb-0 tags">
-					<span class="badge bg-light text-dark">Gráficos</span>
-					<span class="badge bg-light text-dark">Apps</span>
-				</p>
-			</div>
-			<div class="col-lg-4 col-6 mb-4 element-item website">
-				<a href="{{URL_BASE}}assets/institucional/images/servicos/7.jpg" class="popup-link">
-					<img src="{{URL_BASE}}assets/institucional/images/servicos/7.jpg" class="img-fluid mb-2"/>
-				</a>
-				<h5 class="text-uppercase">Lorem ipsun</h5>
-				<p class="mb-0 tags">
-					<span class="badge bg-light text-dark">Website</span>
-				</p>
-			</div>
-			<div class="col-lg-4 col-6 mb-4 element-item email">
-				<a href="{{URL_BASE}}assets/institucional/images/servicos/8.jpg" class="popup-link">
-					<img src="{{URL_BASE}}assets/institucional/images/servicos/8.jpg" class="img-fluid mb-2"/>
-				</a>
-				<h5 class="text-uppercase">Lorem ipsun</h5>
-				<p class="mb-0 tags">
-					<span class="badge bg-light text-dark">Email</span>
-				</p>
-			</div>
-			<div class="col-lg-4 col-6 mb-4 element-item apps">
-				<a href="{{URL_BASE}}assets/institucional/images/servicos/9.jpg" class="popup-link">
-					<img src="{{URL_BASE}}assets/institucional/images/servicos/9.jpg" class="img-fluid mb-2"/>
-				</a>
-				<h5 class="text-uppercase">Lorem ipsun</h5>
-				<p class="mb-0 tags">
-					<span class="badge bg-light text-dark">Apps</span>
-				</p>
-			</div>
+			{% for image in images %}
+				{% set tags = image.tags|split('-') %}
+				<div class="col-lg-4 col-6 mb-4 element-item {% for tag in tags %} {{tag}} {% endfor %}">
+					<a href="{{URL_BASE_IMAGE ~ image.image}}" class="popup-link">
+						<img src="{{URL_BASE_IMAGE ~ image.image}}" class="img-fluid mb-2"/>
+					</a>
+					<p class="text-uppercase mb-1">{{image.text | raw}}</p>
+					<p class="mb-0">
+						{% for tag in tags %}
+							<span class="badge bg-light text-dark">{{tag}}</span>
+						{% endfor %}
+					</p>
+				</div>
+			{% endfor %}
 		</div>
 	</div>
 </div>
-<!--//SERVICOS-->
 {{js | raw}}
+
+<script>
+var idgallery = '{{idgallery}}';
+	// ISOTOPE
+let btns = $("#" + idgallery + " .button-group button");
+
+btns.click(function (e) {
+$("#" + idgallery + " .button-group button").removeClass("active");
+e.target.classList.add("active");
+
+let selector = $(e.target).attr("data-filter");
+$("#" + idgallery + " .grid").isotope({filter: selector});
+});
+
+$(window).on("load", function () {
+$("#" + idgallery + " .grid").isotope({filter: "*"});
+});
+
+// MAGNIFY
+$(".grid .popup-link").magnificPopup({
+type: "image",
+gallery: {
+enabled: true,
+tPrev: "Anterior",
+tNext: "Próxima",
+tCounter: "%curr% de %total%"
+}
+});
+</script>

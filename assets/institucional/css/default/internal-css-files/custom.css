@@ -54,7 +54,7 @@ body {
   text-transform: uppercase;
 }
 
-#servicos a.destaque {
+.servicos a.destaque {
   display: block;
   background: var(--light);
   border-radius: 5px;
@@ -65,24 +65,24 @@ body {
   transition: all ease-out 0.2s;
 }
 
-#servicos a.destaque:hover {
+.servicos a.destaque:hover {
   background: #fff;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.12);
   transform: scale(1.05);
 }
 
-#servicos p {
+.servicos p {
   color: var(--dark);
 }
 
-#servicos a.destaque .img-container {
+.servicos a.destaque .img-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 200px;
 }
 
-#servicos a.destaque .img-container img {
+.servicos a.destaque .img-container img {
   max-height: 160px;
 }
 
@@ -155,24 +155,24 @@ body {
   display: block;
 }
 
-#servicos .badge {
+.servicos .badge {
   font-weight: 400;
 }
 
-#servicos .element-item img {
+.servicos .element-item img {
   border-radius: 5px;
   transition: all ease-out 0.2s;
 }
 
-#servicos .element-item img:hover {
+.servicos .element-item img:hover {
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.4);
 }
 
-#servicos .button-group {
+.servicos .button-group {
   margin-bottom: 30px;
 }
 
-#servicos .button-group button {
+.servicos .button-group button {
   background: none;
   border: none;
   padding: 0;
@@ -182,11 +182,11 @@ body {
   outline: none;
 }
 
-#servicos .button-group button + button {
+.servicos .button-group button + button {
   margin-left: 30px;
 }
 
-#servicos .button-group button.active {
+.servicos .button-group button.active {
   color: var(--primary);
 }
 
@@ -197,8 +197,18 @@ body {
   padding: 30px;
 }
 
+#depoimentos .depoimento .thumb-testimonials {
+    max-width: 120px;
+    max-height: 120px;
+}
+
 #depoimentos .depoimento .quote {
-  max-width: 35px;
+    max-width: 35px;
+}
+
+
+#depoimentos .depoimento .quote {
+ color: var(--primary);
 }
 
 #depoimentos .depoimento .name {

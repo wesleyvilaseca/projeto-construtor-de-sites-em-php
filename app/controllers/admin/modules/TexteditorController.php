@@ -16,8 +16,8 @@ class TexteditorController extends Controller
 {
     private $repository;
     private $usuario;
-    private $route = URL_BASE . 'admin-modules-texteditor/';
-    private $module_code = 'modules-texteditor'; //rota no site institucional
+    private $route          = URL_BASE . 'admin-modules-texteditor/';
+    private $module_code    = 'modules-texteditor'; //rota no site institucional
 
     public function __construct()
     {
@@ -40,7 +40,8 @@ class TexteditorController extends Controller
         $dados['sidemenu']          = $this->load()->controller('admin-common-sidemenu', ['admin-catalog-modules']);
         $dados['tablelist']         = $this->load()->controller('admin-components-tablelistmodules', [
             [
-                'lista'         => $this->repository->find('module_code =:module_code', "module_code={$this->module_code}")->fetch(true)
+                'lista'         => $this->repository->find('module_code =:module_code', "module_code={$this->module_code}")->fetch(true),
+                'actionroute'   => $this->route
             ]
         ]);
         $view                       = 'adm/pages/catalog/modules/default/index';
@@ -107,10 +108,10 @@ class TexteditorController extends Controller
 
     public function save()
     {
-        $request            = $_POST;
-        $text               = $request['text'];
-        $request            = filterpost($request);
-        $request['text']    = $text;
+        $request                = $_POST;
+        $text                   = $request['text'];
+        $request                = filterpost($request);
+        $request['text']        = $text;
 
         $section                = $this->repository;
         $section->description   = $request['description'];

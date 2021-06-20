@@ -17,8 +17,7 @@ class FullwidthSlideShowController extends Controller
 
     public function get($params = null)
     {
-        if ($params)
-            $this->setslide($params);
+        if ($params) $this->setslide($params);
 
         $dados['slide']             = $this->slides;
         $view                       = "institucional/modules/slidesection";

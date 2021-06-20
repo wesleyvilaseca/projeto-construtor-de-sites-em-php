@@ -1,24 +1,23 @@
 <!--NOSSOS SERVICOS-->
-<div id="servicos" class="block">
+<div id="" class="block servicos">
 	<div class="container">
-		<h2 class="title text-center">Nossos serviços</h2>
-		<h4 class="subtitle text-center mb-4">
-			Et sumi kapa namur aondeai rocus pocus
-		</h4>
+		<h2 class="title text-center">{{title}}</h2>
+		<h4 class="subtitle text-center mb-4">{{subtitle}}</h4>
 		<div class="row">
-			<div class="col-lg-3 col-md-6 mb-lg-0 mb-4">
-				<a href="#" class="destaque">
+			
+            {% for card in cards %}
+            <div class="col-lg-3 col-md-6 mb-lg-0 mb-4">
+            <a href="{{card.link}}" class="destaque">
 					<div class="img-container mb-3">
-						<img src="{{URL_BASE}}assets/institucional/images/destaque1.svg" class="img-fluid"/>
+						<img src="{{URL_BASE_IMAGE ~ card.image}}" class="img-fluid"/>
 					</div>
-					<h5 class="text-uppercase">Et sumi kapo</h5>
-					<p class="mb-0">
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-																																				                accusantium
-					</p>
+					<h5 class="text-uppercase">{{card.title}}</h5>
+					<p class="mb-0">{{card.description | raw}}</p>
 				</a>
-			</div>
-			<div class="col-lg-3 col-md-6 mb-lg-0 mb-4">
+                </div>
+            {% endfor %}	
+			
+			{#<div class="col-lg-3 col-md-6 mb-lg-0 mb-4">
 				<a href="#" class="destaque">
 					<div class="img-container mb-3">
 						<img src="{{URL_BASE}}assets/institucional/images/destaque2.svg" class="img-fluid"/>
@@ -53,7 +52,7 @@
 																																				                accusantium
 					</p>
 				</a>
-			</div>
+			</div>#}
 		</div>
 	</div>
 </div>

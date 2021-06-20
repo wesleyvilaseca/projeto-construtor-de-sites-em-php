@@ -40,7 +40,8 @@ class TestmonialsController extends Controller
         $dados['sidemenu']          = $this->load()->controller('admin-common-sidemenu', ['admin-catalog-modules']);
         $dados['tablelist']         = $this->load()->controller('admin-components-tablelistmodules', [
             [
-                'lista'         => $this->repository->find('module_code =:module_code', "module_code={$this->module_code}")->fetch(true)
+                'lista'         => $this->repository->find('module_code =:module_code', "module_code={$this->module_code}")->fetch(true),
+                'actionroute'   => $this->route
             ]
         ]);
         $view                       = 'adm/pages/catalog/modules/default/index';

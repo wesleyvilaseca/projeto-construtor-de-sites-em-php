@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 19-Jun-2021 às 18:37
+-- Generation Time: 20-Jun-2021 às 21:48
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.3.5
 
@@ -74,7 +74,7 @@ INSERT INTO `banner_image` (`id`, `banner_id`, `title`, `link`, `description`, `
 (3, 5, 'Foto2', '#', '', 2, 'SLIDE/slide2.jpg'),
 (4, 5, 'Titulo', '#', '', 3, 'imageteste.jpg'),
 (5, 7, 'Card 1', '#', '<p style=\"text-align: center;\"><strong><strong>Lorem Ipsum</strong> </strong></p>\r\n<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry.</p>', 1, 'STATICCARDS/destaque4.png'),
-(6, 7, 'Card 2', '#', '<p style=\"text-align: center;\"><strong>Lorem Ipsum</strong></p>\r\n<p style=\"text-align: left;\">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>', 2, 'STATICCARDS/destaque2.png'),
+(6, 7, 'Card 2', '#', '<p style=\"text-align: center;\"><strong><strong>Lorem Ipsum</strong> </strong></p>\r\n<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry.</p>', 2, 'STATICCARDS/destaque2.png'),
 (7, 7, 'Card 3', '#', '<p style=\"text-align: center;\"><strong><strong>Lorem Ipsum</strong></strong></p>\r\n<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry.</p>', 3, 'STATICCARDS/destaque4.png'),
 (8, 7, 'Card 4', '#', '<p style=\"text-align: center;\"><strong><strong>Lorem Ipsum</strong></strong></p>\r\n<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry.</p>', 4, 'STATICCARDS/destaque1.png'),
 (9, 10, 'Fulado 1', '#', '<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</p>', 1, 'DEPOIMENTOS/user4.png'),
@@ -149,20 +149,26 @@ DROP TABLE IF EXISTS `image_gallery`;
 CREATE TABLE IF NOT EXISTS `image_gallery` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `banner_id` int(11) DEFAULT NULL,
-  `image_filter` varchar(100) DEFAULT NULL,
   `image` varchar(500) DEFAULT NULL,
   `text` text,
   `tags` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `image_gallery`
 --
 
-INSERT INTO `image_gallery` (`id`, `banner_id`, `image_filter`, `image`, `text`, `tags`) VALUES
-(1, 8, 'bmx edit', 'paradise.png', NULL, 'bmx-street'),
-(2, 8, 'bmx2', 'imageteste.jpg', NULL, 'bmx-park');
+INSERT INTO `image_gallery` (`id`, `banner_id`, `image`, `text`, `tags`) VALUES
+(11, 8, 'GALLERY/4.jpg', '<p>LOREM IPSUM</p>', 'apps'),
+(10, 8, 'GALLERY/5.jpg', '<p>LOREM IPSUM</p>', 'email'),
+(7, 8, 'GALLERY/1.jpg', '<p>LOREM IPSUM</p>', 'website-apps'),
+(8, 8, 'GALLERY/2.jpg', '<p>LOREM IPSUM</p>', 'email'),
+(9, 8, 'GALLERY/3.jpg', '<p>LOREM IPSUM</p>', 'apps'),
+(12, 8, 'GALLERY/6.jpg', '<p>LOREM IPSUM</p>', 'graficos-apps'),
+(13, 8, 'GALLERY/7.jpg', '<p>LOREM IPSUM</p>', 'website'),
+(14, 8, 'GALLERY/8.jpg', '<p>LOREM IPSUM</p>', 'email'),
+(15, 8, 'GALLERY/9.jpg', '<p>LOREM IPSUN</p>', 'apps');
 
 -- --------------------------------------------------------
 
@@ -216,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `layout_modules` (
   `position` varchar(1) DEFAULT NULL,
   `enable` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `layout_modules`
@@ -225,9 +231,11 @@ CREATE TABLE IF NOT EXISTS `layout_modules` (
 INSERT INTO `layout_modules` (`id`, `layout_id`, `module_id`, `sort_order`, `position`, `enable`) VALUES
 (3, 1, 4, 1, 'C', 'S'),
 (4, 1, 5, 2, 'C', 'S'),
-(6, 1, 12, 3, 'C', 'S'),
-(7, 1, 17, 4, 'C', 'S'),
-(8, 1, 19, 5, 'C', 'S');
+(9, 1, 21, 3, 'C', 'S'),
+(10, 1, 10, 4, 'C', 'S'),
+(11, 1, 12, 5, 'C', 'S'),
+(12, 1, 17, 6, 'C', 'S'),
+(13, 1, 19, 7, 'C', 'S');
 
 -- --------------------------------------------------------
 
@@ -243,20 +251,21 @@ CREATE TABLE IF NOT EXISTS `module` (
   `settings` text,
   `enable` varchar(1) NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `module`
 --
 
 INSERT INTO `module` (`id`, `description`, `module_code`, `settings`, `enable`) VALUES
-(5, 'Sessão 1', 'modules-defaultsection', '{\"image\":\"DEFAULT\\/destaque1.png\",\"text\":\"Lorem Ipsun Dolor aondeai Et Sumi kapa namur aondeai rocus pocus Saiba mais Contato\",\"image_position\":\"R\"}', 'S'),
+(5, 'Sessão 1', 'modules-defaultsection', '{\"image\":\"DEFAULT\\/destaque1.png\",\"text\":\"<h1>Lorem Ipsun Dolor aondeai<\\/h1>\\r\\n<h4 class=\\\"mb-4\\\">Et Sumi kapa namur aondeai rocus pocus<\\/h4>\\r\\n<p><a class=\\\"button btn btn-primary button-primary d-md-inline-block d-block mb-md-0 mb-2 mr-md-2\\\" href=\\\"#\\\">Saiba mais<\\/a> <a class=\\\"button btn btn-outline-primary button-primary-outline d-md-inline-block d-block\\\" href=\\\"#\\\">Contato<\\/a><\\/p>\",\"image_position\":\"R\"}', 'S'),
 (4, 'Slide', 'modules-fullwidthSlideShow', '{\"banner\":\"5\"}', 'S'),
 (17, 'Commentários ', 'modules-testmonials', '{\"banner\":\"10\"}', 'S'),
 (20, 'Localização ', 'modules-texteditor', '{\"text\":\"<p><iframe style=\\\"border: 0px none; width: 100%; height: 300px;\\\" src=\\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m18!1m12!1m3!1d3657.8747059840416!2d-46.656057784495374!3d-23.53700458469501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce583e4a595263%3A0xae258b0617e722f3!2sAlameda%20Barros%2C%20278%20-%20Santa%20Cecilia%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001232-001!5e0!3m2!1spt-BR!2sbr!4v1583679730376!5m2!1spt-BR!2sbr\\\" width=\\\"323\\\" height=\\\"538\\\" frameborder=\\\"0\\\" allowfullscreen=\\\"allowfullscreen\\\"><\\/iframe><\\/p>\"}', 'S'),
 (10, 'Tipos de serviços', 'modules-staticcards', '{\"title\":\"is simply dummy text of the printing \",\"subtitle\":\"is simply dummy text\",\"banner\":\"7\",\"text\":null}', 'S'),
 (12, 'Galeria Home', 'modules-imageGallery', '{\"title\":\"Ultimos trabalhos\",\"subtitle\":\"\",\"banner\":\"8\"}', 'S'),
-(19, 'Fique por dentro das novidades', 'modules-informative', '{\"title\":\"Fique por dentro das novidades\",\"subtitle\":\"Et sumi kapa namur aondeai rocus pocus est talaraum \"}', 'S');
+(19, 'Fique por dentro das novidades', 'modules-informative', '{\"title\":\"Fique por dentro das novidades\",\"subtitle\":\"Et sumi kapa namur aondeai rocus pocus est talaraum \"}', 'S'),
+(21, 'Sessão 2', 'modules-defaultsection', '{\"image\":\"DEFAULT\\/about.png\",\"text\":\"<h2 class=\\\"title\\\">At vero eos et accusamus et iusto<\\/h2>\\r\\n<h4 class=\\\"subtitle\\\">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque<\\/h4>\\r\\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<\\/p>\\r\\n<p><a class=\\\"button btn btn-primary button-primary d-md-inline-block d-block mb-md-0 mb-2 mr-md-2\\\" href=\\\"#\\\">Entre em contato<\\/a><\\/p>\",\"image_position\":\"L\"}', 'S');
 
 -- --------------------------------------------------------
 

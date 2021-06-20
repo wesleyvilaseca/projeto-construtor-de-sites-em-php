@@ -116,7 +116,7 @@ class ImageGalleryController extends Controller
         $dados['breadcrumb'][]      = ['route' => URL_BASE . 'admin-catalog-banners', 'title' => 'Banners'];
         $dados['breadcrumb'][]      = ['route' => URL_BASE . 'admin-catalog-bannerImage/index/' . $idbanner, 'title' => 'Imagens banner ' . $banner->description];
         $dados['breadcrumb'][]      = ['route' => URL_BASE . 'admin-catalog-bannerImage/edit/' . $idbanner . '/' . $idimage, 'title' =>  'Remover imagem' . $imagem->title, 'active' => true];
-        $dados['back']              =  URL_BASE . 'admin-catalog-bannerImage/index/' . $idbanner;
+        $dados['back']              =  $this->route . 'index/' . $idbanner;
         $dados['title']             = 'Remover Imagem ' . $imagem->title;
         $dados["toptitle"]          = 'Remover Imagem ' . $imagem->title;
         $dados['topbar']            = $this->load()->controller('admin-common-topbar');
@@ -138,9 +138,9 @@ class ImageGalleryController extends Controller
 
         $image                  = $this->repository;
         $image->image           = $request['image'];
-        $image->image_filter    = $request['image_filter'];
+        //$image->image_filter    = $request['image_filter'];
         $image->text            = $request['text'] ?: null;
-        $image->tags            = $request['tags'] ?: null;
+        $image->tags            = $request['tags'];
         $image->banner_id       = $request['banner_id'];
         $imgeId                 = $image->save();
         if ($imgeId) {
@@ -165,9 +165,9 @@ class ImageGalleryController extends Controller
         $request['text']    = $text;
 
         $item->image        = $request['image'];
-        $item->image_filter = $request['image_filter'];
+        //$item->image_filter = $request['image_filter'];
         $item->text         = $request['text'] ?: null;
-        $item->tags         = $request['tags'] ?: null;
+        $item->tags         = $request['tags'];
         $item->banner_id    = $request['banner_id'];
 
         $itemId            = $item->save();
@@ -193,10 +193,10 @@ class ImageGalleryController extends Controller
         $itemId = $item->destroy();
         if ($itemId) {
             setmessage(['tipo' => 'success', 'msg' => 'Item removido com sucesso']);
-            redirect(URL_BASE . 'admin-catalog-bannerImage/index/' . $request['banner_id']);
+            redirect($this->route . 'index/' . $request['banner_id']);
         } else {
             setmessage(['tipo' => 'warning', 'msg' => 'Ocorreu um erro na requisição']);
-            redirect(URL_BASE . 'admin-catalog-bannerImage/index/' . $request['banner_id']);
+            redirect($this->route . 'index/' . $request['banner_id']);
         }
     }
 
@@ -206,7 +206,6 @@ class ImageGalleryController extends Controller
 
         $form           = new FormWrapper(new Form('formimage'), $action);
         $image          = new ImputFile('image', $editable);
-        $filter         = new Entry('image_filter', $editable);
         $text           = new Text('text', $editable);
         $tags           = new Entry('tags', $editable);
         $bannerid       = new Hidden('banner_id');
@@ -214,9 +213,8 @@ class ImageGalleryController extends Controller
         $bannerid->setProperty('value', $idbanner);
 
         $form->addField($image,         ['Imagem' => 'Titulo *', 'css' => 'mb-4']);
-        $form->addField($filter,        ['label' => 'Filtro *', 'css' => 'mb-4']);
+        $form->addField($tags,          ['label' => 'Tags * (em caso de mais de 1, separa por hifen - )', 'css' => 'mb-4']);
         $form->addField($text,          ['label' => 'Texto', 'css' => 'mb-4', 'editor' => true]);
-        $form->addField($tags,          ['label' => 'Tags (em caso de mais de 1, separa por hifen - )', 'css' => 'mb-4']);
         $form->addField($bannerid, []);
 
         if ($data) {

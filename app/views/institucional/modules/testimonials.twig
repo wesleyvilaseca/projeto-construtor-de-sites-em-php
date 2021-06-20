@@ -1,125 +1,24 @@
 <!--DEPOIMENTOS-->
 <div id="depoimentos" class="block">
 	<div class="container">
-		<h2 class="title text-center">Depoimentos</h2>
-		<h4 class="subtitle text-center mb-4">
-			Et sumi kapa namur aondeai rocus pocus
-		</h4>
-
+		<h2 class="title text-center">{{title}}</h2>
 		<div class="owl-carousel owl-theme owl-loaded">
-			<div>
-				<div class="depoimento">
-					<img src="{{URL_BASE}}assets/institucional/images/user.svg"/>
-					<div class="depoimento-texto pl-3">
-						<p>
-							Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-																																									                  accusantium dolorem que laudantium, totam rem aperiam, eaque																																		                  ipsa quae ab illo inventore veritatis.
-						</p>
-						<p class="name">
-							<span>Maikel Neris</span>
-							/ Diretor da Decode Web
-						</p>
-						<p class="mb-0">
-							<img src="{{URL_BASE}}assets/institucional/images/quote.svg" class="quote float-right"/>
-						</p>
+			{% for comment in comments %}
+				<div>
+					<div class="depoimento">
+						<img src="{{URL_BASE_IMAGE ~ comment.image}}" class="thumb-testimonials"/>
+						<div class="depoimento-texto ps-3">
+							<p>{{comment.description | raw}}</p>
+							<p class="name">
+								<span>{{comment.title}}</span>
+							</p>
+							<p class="mb-0" align="right">
+								<i class="fas fa-quote-right fa-lg quote"></i>
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div>
-				<div class="depoimento">
-					<img src="{{URL_BASE}}assets/institucional/images/user.svg"/>
-					<div class="depoimento-texto pl-3">
-						<p>
-							Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-																																									                  accusantium dolorem que laudantium, totam rem aperiam, eaque
-																																									                  ipsa quae ab illo inventore veritatis.
-						</p>
-						<p class="name">
-							<span>Maikel Neris</span>
-							/ Diretor da Decode Web
-						</p>
-						<p class="mb-0">
-							<img src="{{URL_BASE}}assets/institucional/images/quote.svg" class="quote float-right"/>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="depoimento">
-					<img src="{{URL_BASE}}assets/institucional/images/user.svg"/>
-					<div class="depoimento-texto pl-3">
-						<p>
-							Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-																																									                  accusantium dolorem que laudantium, totam rem aperiam, eaque
-																																									                  ipsa quae ab illo inventore veritatis.
-						</p>
-						<p class="name">
-							<span>Maikel Neris</span>
-							/ Diretor da Decode Web
-						</p>
-						<p class="mb-0">
-							<img src="{{URL_BASE}}assets/institucional/images/quote.svg" class="quote float-right"/>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="depoimento">
-					<img src="{{URL_BASE}}assets/institucional/images/user.svg"/>
-					<div class="depoimento-texto pl-3">
-						<p>
-							Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-																																									                  accusantium dolorem que laudantium, totam rem aperiam, eaque
-																																									                  ipsa quae ab illo inventore veritatis.
-						</p>
-						<p class="name">
-							<span>Maikel Neris</span>
-							/ Diretor da Decode Web
-						</p>
-						<p class="mb-0">
-							<img src="{{URL_BASE}}assets/institucional/images/quote.svg" class="quote float-right"/>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="depoimento">
-					<img src="{{URL_BASE}}assets/institucional/images/user.svg"/>
-					<div class="depoimento-texto pl-3">
-						<p>
-							Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-																																									                  accusantium dolorem que laudantium, totam rem aperiam, eaque
-																																									                  ipsa quae ab illo inventore veritatis.
-						</p>
-						<p class="name">
-							<span>Maikel Neris</span>
-							/ Diretor da Decode Web
-						</p>
-						<p class="mb-0">
-							<img src="{{URL_BASE}}assets/institucional/images/quote.svg" class="quote float-right"/>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="depoimento">
-					<img src="{{URL_BASE}}assets/institucional/images/user.svg"/>
-					<div class="depoimento-texto pl-3">
-						<p>
-							Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-																																									                  accusantium dolorem que laudantium, totam rem aperiam, eaque
-																																									                  ipsa quae ab illo inventore veritatis.
-						</p>
-						<p class="name">
-							<span>Maikel Neris</span>
-							/ Diretor da Decode Web
-						</p>
-						<p class="mb-0">
-							<img src="{{URL_BASE}}assets/institucional/images/quote.svg" class="quote float-right"/>
-						</p>
-					</div>
-				</div>
-			</div>
+			{% endfor %}
 		</div>
 	</div>
 </div>

@@ -13,7 +13,7 @@ class ImageGalleryRequest
     use DataSession;
 
     private $route = URL_BASE . 'admin-catalog-imageGallery/';
-    private $fillable = ['image', 'filtro'];
+    private $fillable = ['image', 'tags'];
 
     public function save($request)
     {

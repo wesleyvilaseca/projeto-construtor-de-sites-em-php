@@ -91,7 +91,7 @@ class LayoutmodulesController extends Controller
         $dados['usuario']           = $this->usuario;
         $dados['breadcrumb'][]      = ['route' => URL_BASE . 'admin-catalog-home', 'title' => 'Painel de controle'];
         $dados['breadcrumb'][]      = ['route' => URL_BASE . 'admin-catalog-layout', 'title' => 'Layout'];
-        $dados['breadcrumb'][]      = ['route' => $this->route  .'index/' . $idlayout, 'title' => 'Modulos da página ' . $page->description];
+        $dados['breadcrumb'][]      = ['route' => $this->route  . 'index/' . $idlayout, 'title' => 'Modulos da página ' . $page->description];
         $dados['breadcrumb'][]      = ['route' => '#', 'title' => 'Novo modulo', 'active' => true];
         $dados['title']             = 'Novo Modulo';
         $dados["toptitle"]          = 'Novo Modulo';
@@ -228,23 +228,20 @@ class LayoutmodulesController extends Controller
         }
     }
 
-    private function delete(string $id)
+    public function delete(string $idlayout, string $idlayout_module)
     {
-        $item = $this->repository->findById($id);
-        if (!$item)
-            redirectBack();
+        if (!$idlayout || !$idlayout_module) redirectBack();
 
-        $request    = $_POST;
-        if (isset($request))
-            $request = filterpost($request);
+        $item = $this->repository->findById($idlayout_module);
+        if (!$item) redirectBack();
 
         $itemId = $item->destroy();
         if ($itemId) {
             setmessage(['tipo' => 'success', 'msg' => 'Página removida com sucesso']);
-            redirect($this->route);
+            redirect($this->route . 'index/' . $idlayout);
         } else {
             setmessage(['tipo' => 'warning', 'msg' => 'Ocorreu um erro na requisição']);
-            redirect($this->route);
+            redirect($this->route . 'index/' . $idlayout);
         }
     }
 
@@ -264,7 +261,7 @@ class LayoutmodulesController extends Controller
         ]);
         $sort_order = new Number('sort_order', $readyonly);
         $enable = new Combo('enable', $readyonly);
-        $enable->addItems(['S' => 'Ativo','N' => 'Inativo']);
+        $enable->addItems(['S' => 'Ativo', 'N' => 'Inativo']);
         $layout_id = new Hidden('layout_id');
         $layout_id->setProperty('value', $idlayout);
 

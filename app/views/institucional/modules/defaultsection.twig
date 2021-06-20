@@ -1,0 +1,24 @@
+<!--SLIDER-->
+<div id="slider" class="block">
+	<div class="container pt-5">
+		<div class="row">
+			{% if image_position == 'L'%}
+				<div class="col-md-6 align-self-center order-md-2 order-1 mb-md-0 mb-4">
+					<img src="{{URL_BASE_IMAGE ~ image}}" class="img-fluid"/>
+				</div>
+				<div class="col-md-6 align-self-center order-md-2 order-1 mb-md-0 mb-4">
+					{{text | raw}}
+				</div>
+			{% else %}
+				<div class="col-md-6 align-self-center order-md-2 order-1 mb-md-0 mb-4">
+					{{text | raw}}
+				</div>
+				<div class="col-md-6 align-self-center order-md-2 order-1 mb-md-0 mb-4">
+					<img src="{{URL_BASE_IMAGE ~ image}}" class="img-fluid"/>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+<!--//SLIDER-->
+{{js | raw}}

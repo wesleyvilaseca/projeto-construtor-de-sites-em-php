@@ -9,7 +9,8 @@ class TablelistmodulesController extends Controller
     
     public function get($params = null)
     {   
-        $dados['itens']             = $params['lista'];
+        $dados['itens']             = @$params['lista'];
+        $dados['action']            = @$params['actionroute'];
         $view                       = "adm/components/tablelistmodules";
         return $this->loadView($view, $dados);
     }
