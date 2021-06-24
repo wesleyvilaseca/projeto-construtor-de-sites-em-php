@@ -158,12 +158,12 @@ trait LibsJs
     }
 
     public function isotope(){
-        $js = '<script src="' . URL_BASE . 'assets/institucional/js/isotope.pkgd.min.js"></script>';
+        $js = '<script src="' . URL_BASE . 'assets/institucional/js/vendor/isotope.pkgd.min.js"></script>';
         return $js;
     }
 
     public function magnificPopUp() {
-        $js = '<script src="' . URL_BASE . 'assets/institucional/js/magnify/jquery.magnific-popup.min.js"></script>';
+        $js = '<script src="' . URL_BASE . 'assets/institucional/js/vendor/magnify/jquery.magnific-popup.min.js"></script>';
         return $js;
     }
 }

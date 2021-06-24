@@ -30,3 +30,5 @@ jQuery(document).ready(function ($) {
     },
   });
 });
+
+$('#nav-principal').bootnavbar();

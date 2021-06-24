@@ -34,39 +34,48 @@ class Core
         $url = explode("index.php", $_SERVER["PHP_SELF"]);
         $url = end($url);
 
-        if ($url != "") {
-            $url = explode('/', $url);
-            //pega o controller
-            array_shift($url);
-            if (strpos($url[0], '-') == true) { //verifica se o controller está em algum diretório dentro da pasta controllers
-                $route = explode('-', $url[0]);
-                for ($i = 0; $i < sizeof($route); $i++) {
-                    ($i < (sizeof($route) - 1)) ? $this->route .= $route[$i] . '\\' : $this->controller = $this->route . ucfirst($route[$i]) . "Controller";
-                }
-            } else {
-                $this->controller = ucfirst($url[0]) . "Controller";
-            }
-            //pega o metodo
-            array_shift($url);
-            if (isset($url[0])) {
-                $this->metodo = $url[0];
-                //pega os parametros
-                array_shift($url);
-            }
-
-            if (isset($url[0])) {
-                //pega os parametros
-                $this->parametros = array_filter($url);
-            }
+        if (EM_MANUTENCAO) {
+            $this->controller = 'MaintenanceController';
         } else {
+            if ($url != "") {
+                $url = explode('/', $url);
+                //pega o controller
+                array_shift($url);
+                if (strpos($url[0], '-') == true) { //verifica se o controller está em algum diretório dentro da pasta controllers
+                    $route = explode('-', $url[0]);
+                    for ($i = 0; $i < sizeof($route); $i++) {
+                        ($i < (sizeof($route) - 1)) ? $this->route .= $route[$i] . '\\' : $this->controller = $this->route . ucfirst($route[$i]) . "Controller";
+                    }
+                } else {
+                    $controller = ucfirst($url[0]);
+                    if ($controller == 'Page') { //for pages default
+                        $controller = 'institucional\\common\\Page';
+                        $this->controller = $controller . "Controller";
+                    } else {
+                        $this->controller = $controller . "Controller";
+                    }
+                }
+                //pega o metodo
+                array_shift($url);
+                if (isset($url[0])) {
+                    $this->metodo = $url[0];
+                    //pega os parametros
+                    array_shift($url);
+                }
 
-            if (strpos(CONTROLLER_PADRAO, '\\') == true) {
-                $route = explode('\\', CONTROLLER_PADRAO);
-                for ($i = 0; $i < sizeof($route); $i++) {
-                    ($i < (sizeof($route) - 1)) ? $this->route .= $route[$i] . '\\' : $this->controller = $this->route . ucfirst($route[$i]) . "Controller";
+                if (isset($url[0])) {
+                    //pega os parametros
+                    $this->parametros = array_filter($url);
                 }
             } else {
-                $this->controller = ucfirst(CONTROLLER_PADRAO) . "Controller";
+                if (strpos(CONTROLLER_PADRAO, '\\') == true) {
+                    $route = explode('\\', CONTROLLER_PADRAO);
+                    for ($i = 0; $i < sizeof($route); $i++) {
+                        ($i < (sizeof($route) - 1)) ? $this->route .= $route[$i] . '\\' : $this->controller = $this->route . ucfirst($route[$i]) . "Controller";
+                    }
+                } else {
+                    $this->controller = ucfirst(CONTROLLER_PADRAO) . "Controller";
+                }
             }
         }
     }

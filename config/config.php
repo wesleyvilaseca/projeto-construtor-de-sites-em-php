@@ -43,3 +43,5 @@ define('FILEMANAGER', [
     'TEMPLATELIST'              => URL_BASE . 'assets/adm/vendor/tinymce/templates/',
     'DIALOG'                    => URL_BASE . 'assets/adm/vendor/managerfile/filemanager/dialog.php?relative_url=1&type=0&'/*field_id=image-input*/
 ]);
+
+define('EM_MANUTENCAO', 0);

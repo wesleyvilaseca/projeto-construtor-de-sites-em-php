@@ -34,7 +34,7 @@ class DepartamentController extends Controller
         $dados['breadcrumb'][]      = ['route' => URL_BASE . 'admin-catalog-departament', 'title' => 'Departamentos', 'active' => true];
         $dados['title']             = 'Departamentos';
         $dados["toptitle"]          = 'Departamentos';
-        $dados["departaments"]      =  $this->repository->find('enable=:enable', "enable=S")->fetch(true);
+        $dados["departaments"]      =  $this->repository->find()->fetch(true);
         $dados["addroute"]          = $this->route . 'add';
         $dados['editroute']         = $this->route . 'edit/';
         $dados['deleteroute']       = $this->route . 'remove/';
@@ -150,7 +150,6 @@ class DepartamentController extends Controller
         //dd($item);
         if (!$item)
             redirect($this->route);
-
         $save = function ($item, $request) {
             $item->description   = $request['description'];
             $item->top           = $request['top'] ?: 'N';
@@ -168,13 +167,22 @@ class DepartamentController extends Controller
 
         $request                    = $_POST;
         $request                    = filterpost($request);
+
+        if ($request['parent_id'] == $id) {
+            $request['id'] = $id;
+            setmessage(['tipo' => 'warning', 'msg' => 'O departamento pai não pode ser ele mesme!']);
+            setdataform($request);
+            redirect($this->route . 'edit/' . $id);
+        }
+
+
         if ($request['seo'] != $item->seo) {
             $exist = $this->repository->find('seo=:seo', "seo={$request['seo']}")->fetch(true);
             if ($exist) {
                 $request['id'] = $id;
                 setmessage(['tipo' => 'warning', 'msg' => 'Já existe uma página com a descrição ' . $request['description'] . ' !']);
                 setdataform($request);
-                redirectBack();
+                redirect($this->route . 'edit/' . $id);
             } else {
                 $save($item, $request);
             }
