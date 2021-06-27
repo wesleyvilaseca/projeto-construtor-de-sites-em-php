@@ -8,6 +8,7 @@ use app\models\Layout;
 use app\models\LayoutModules;
 use app\models\Module;
 use app\models\Theme;
+use PDFlib;
 
 class HomeController extends Controller
 {

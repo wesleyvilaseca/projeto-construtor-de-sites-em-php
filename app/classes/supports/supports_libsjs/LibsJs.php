@@ -115,6 +115,7 @@ trait LibsJs
 
     public function tinyEditorActive()
     {
+        // dd(getSession('theme'));
         $rootcss = json_decode(getSession('theme'))->root_css_file;
         $css =  $rootcss ? URL_BASE . $rootcss : URL_BASE . 'assets/adm/css/all.css';
         $editor = $this->tinymce();

@@ -165,6 +165,6 @@ class ConfigsiteController extends Controller
     private function themeSessionUpdate()
     {
         $id_theme           = ($this->repository->find()->fetch())->theme_id;
-        setSession('theme', json_encode($this->theme->findById($id_theme)));
+        setSession('theme', json_encode($this->theme->findById($id_theme)->data()));
     }
 }
