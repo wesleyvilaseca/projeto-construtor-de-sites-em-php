@@ -134,10 +134,10 @@ class TexteditorController extends Controller
 
         $request            = $_POST;
         $text               = $request['text'];
-        $request            = filterpost($request);
+
+        if (isset($request)) $request = filterpost($request);
+
         $request['text']    = $text;
-        if (isset($request))
-            $request = filterpost($request);
 
         $item->description  = $request['description'];
         $item->enable       = $request['enable'];

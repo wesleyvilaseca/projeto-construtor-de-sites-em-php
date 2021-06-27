@@ -4,6 +4,7 @@ namespace app\controllers\institucional\modules;
 
 use app\core\Controller;
 use app\models\Imagegallery;
+use app\models\Modules;
 
 class ImagegalleryController extends Controller
 {
@@ -11,15 +12,22 @@ class ImagegalleryController extends Controller
     private $filters;
     private $gallery;
     private $idgallery;
+    private $module;
+    private $module_code = 'imagegallery';
 
     public function __construct()
     {
-        $this->gallery = new Imagegallery;
-        $this->idgallery = 'gallery' . rand();
+        $module             = new Modules;
+        $this->gallery      = new Imagegallery;
+        $this->idgallery    = 'gallery' . rand();
+
+        $this->module       = $module->find("module_code=:module_code", "module_code={$this->module_code}")->fetch();
     }
 
     public function get($params = null)
     {
+        if ($this->module->enable == "N") return null;
+
         if ($params) $this->setSettings($params);
 
         //dd($this->settings['images']);

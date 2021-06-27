@@ -4,19 +4,27 @@ namespace app\controllers\institucional\modules;
 
 use app\core\Controller;
 use app\models\BannerImage;
+use app\models\Modules;
 
 class FullwidthSlideShowController extends Controller
 {
     private $banners;
     private $slides;
+    private $module;
+    private $module_code = 'slideshowfull';
 
     public function __construct()
     {
-        $this->banners = new BannerImage;
+        $module         = new Modules;
+        $this->banners  = new BannerImage;
+        $this->module   = $module->find("module_code=:module_code", "module_code={$this->module_code}")->fetch();
     }
+
+    
 
     public function get($params = null)
     {
+        if ($this->module->enable == "N") return null;
         if ($params) $this->setslide($params);
 
         $dados['slide']             = $this->slides;

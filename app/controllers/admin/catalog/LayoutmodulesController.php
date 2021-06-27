@@ -33,12 +33,10 @@ class LayoutmodulesController extends Controller
 
     public function index(string $idlayout)
     {
-        if (!$idlayout)
-            redirectBack();
+        if (!$idlayout) redirectBack();
 
         $page = $this->layout->findById($idlayout);
-        if (!$page)
-            redirectBack();
+        if (!$page) redirectBack();
 
         $dados['usuario']           = $this->usuario;
         $dados['breadcrumb'][]      = ['route' => URL_BASE . 'admin-catalog-home', 'title' => 'Painel de controle'];
@@ -48,21 +46,21 @@ class LayoutmodulesController extends Controller
         $dados["toptitle"]          = 'Modulos da página ' . $page->description;
         $dados['list_leftcol']      = $this->load()->controller('admin-components-tablelistLayoutModules', [
             [
-                "list"          => $this->repository->list($position = 'L'),
+                "list"          => $this->repository->list($position = 'L', $idlayout),
                 "editroute"     => $this->route . 'edit/' . $idlayout . '/',
                 "deleteroute"   => $this->route . 'remove/' . $idlayout . '/'
             ]
         ]);
         $dados['list_center']       = $this->load()->controller('admin-components-tablelistLayoutModules', [
             [
-                "list"          => $this->repository->list($position = 'C'),
+                "list"          => $this->repository->list($position = 'C', $idlayout),
                 "editroute"     => $this->route . 'edit/' . $idlayout . '/',
                 "deleteroute"   => $this->route . 'remove/' . $idlayout . '/'
             ]
         ]);
         $dados['list_rightcol']     = $this->load()->controller('admin-components-tablelistLayoutModules', [
             [
-                "list"          => $this->repository->list($position = 'R'),
+                "list"          => $this->repository->list($position = 'R', $idlayout),
                 "editroute"     => $this->route . 'edit/' . $idlayout . '/',
                 "deleteroute"   => $this->route . 'remove/' . $idlayout . '/'
             ]

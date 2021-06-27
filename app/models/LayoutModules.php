@@ -11,10 +11,10 @@ class LayoutModules extends DataLayer
         parent::__construct('layout_modules', [], 'id', false);
     }
 
-    public function list($position = "C")
+    public function list($position = "C", $id_layout)
     {
         $module = new Module;
-        $list = $this->find("position=:position", "position={$position}")->fetch(true);
+        $list = $this->find("position=:position and layout_id=:layout_id", "position={$position}&layout_id={$id_layout}")->order("sort_order ASC")->fetch(true);
         if ($list) {
             foreach ($list as $key => $item) {
                 $m = $module->findById($item->module_id);
