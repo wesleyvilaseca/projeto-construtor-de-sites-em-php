@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 20-Jun-2021 às 21:48
--- Versão do servidor: 5.7.26
--- versão do PHP: 7.3.5
+-- Tempo de geração: 27-Jun-2021 às 22:14
+-- Versão do servidor: 5.7.31
+-- versão do PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sistemaphp`
+-- Banco de dados: `sistemaphp`
 --
 
 -- --------------------------------------------------------
@@ -130,14 +129,19 @@ CREATE TABLE IF NOT EXISTS `departaments` (
   `sort_order` int(11) DEFAULT NULL,
   `enable` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `departaments`
 --
 
 INSERT INTO `departaments` (`id`, `description`, `top`, `parent_id`, `layout_id`, `seo`, `sort_order`, `enable`) VALUES
-(1, 'Home', 'S', NULL, 1, 'home', 1, 'S');
+(1, 'Home', 'S', NULL, 1, 'home', 1, 'S'),
+(14, 'Any', 'N', 16, NULL, 'any', 2, 'S'),
+(13, 'Sobre a empresa', 'N', 16, 3, 'sobre-a-empresa', 1, 'S'),
+(12, 'Contato', 'S', NULL, 2, 'contato', 3, 'S'),
+(16, 'Quem somos', 'S', NULL, 2, 'quem-somos', 2, 'S'),
+(15, 'Any Sub', 'N', 14, NULL, 'any-sub', 1, 'S');
 
 -- --------------------------------------------------------
 
@@ -197,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `layout` (
   `footer` varchar(1) DEFAULT NULL,
   `enable` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `layout`
@@ -205,7 +209,8 @@ CREATE TABLE IF NOT EXISTS `layout` (
 
 INSERT INTO `layout` (`id`, `description`, `header`, `footer`, `enable`) VALUES
 (1, 'Home', 'S', 'S', 'S'),
-(2, 'Sobre nós', NULL, NULL, 'N');
+(2, 'Contato', 'S', 'S', 'S'),
+(3, 'Sobre a Empresa', 'S', 'S', 'S');
 
 -- --------------------------------------------------------
 
@@ -222,20 +227,22 @@ CREATE TABLE IF NOT EXISTS `layout_modules` (
   `position` varchar(1) DEFAULT NULL,
   `enable` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `layout_modules`
 --
 
 INSERT INTO `layout_modules` (`id`, `layout_id`, `module_id`, `sort_order`, `position`, `enable`) VALUES
-(3, 1, 4, 1, 'C', 'S'),
-(4, 1, 5, 2, 'C', 'S'),
-(9, 1, 21, 3, 'C', 'S'),
-(10, 1, 10, 4, 'C', 'S'),
-(11, 1, 12, 5, 'C', 'S'),
-(12, 1, 17, 6, 'C', 'S'),
-(13, 1, 19, 7, 'C', 'S');
+(23, 1, 10, 2, 'C', 'S'),
+(22, 1, 19, 6, 'C', 'S'),
+(21, 1, 17, 5, 'C', 'S'),
+(20, 1, 12, 4, 'C', 'S'),
+(19, 1, 21, 3, 'C', 'S'),
+(18, 1, 5, 2, 'C', 'S'),
+(16, 2, 20, 1, 'C', 'S'),
+(17, 1, 4, 1, 'C', 'S'),
+(24, 3, 22, 1, 'L', 'S');
 
 -- --------------------------------------------------------
 
@@ -251,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `module` (
   `settings` text,
   `enable` varchar(1) NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `module`
@@ -261,11 +268,12 @@ INSERT INTO `module` (`id`, `description`, `module_code`, `settings`, `enable`) 
 (5, 'Sessão 1', 'modules-defaultsection', '{\"image\":\"DEFAULT\\/destaque1.png\",\"text\":\"<h1>Lorem Ipsun Dolor aondeai<\\/h1>\\r\\n<h4 class=\\\"mb-4\\\">Et Sumi kapa namur aondeai rocus pocus<\\/h4>\\r\\n<p><a class=\\\"button btn btn-primary button-primary d-md-inline-block d-block mb-md-0 mb-2 mr-md-2\\\" href=\\\"#\\\">Saiba mais<\\/a> <a class=\\\"button btn btn-outline-primary button-primary-outline d-md-inline-block d-block\\\" href=\\\"#\\\">Contato<\\/a><\\/p>\",\"image_position\":\"R\"}', 'S'),
 (4, 'Slide', 'modules-fullwidthSlideShow', '{\"banner\":\"5\"}', 'S'),
 (17, 'Commentários ', 'modules-testmonials', '{\"banner\":\"10\"}', 'S'),
-(20, 'Localização ', 'modules-texteditor', '{\"text\":\"<p><iframe style=\\\"border: 0px none; width: 100%; height: 300px;\\\" src=\\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m18!1m12!1m3!1d3657.8747059840416!2d-46.656057784495374!3d-23.53700458469501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce583e4a595263%3A0xae258b0617e722f3!2sAlameda%20Barros%2C%20278%20-%20Santa%20Cecilia%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001232-001!5e0!3m2!1spt-BR!2sbr!4v1583679730376!5m2!1spt-BR!2sbr\\\" width=\\\"323\\\" height=\\\"538\\\" frameborder=\\\"0\\\" allowfullscreen=\\\"allowfullscreen\\\"><\\/iframe><\\/p>\"}', 'S'),
+(20, 'Localização ', 'modules-texteditor', '{\"text\":\"<p><iframe style=\\\"border: 0;\\\" src=\\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m18!1m12!1m3!1d3657.8747059840416!2d-46.656057784495374!3d-23.53700458469501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce583e4a595263%3A0xae258b0617e722f3!2sAlameda%20Barros%2C%20278%20-%20Santa%20Cecilia%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001232-001!5e0!3m2!1spt-BR!2sbr!4v1583679730376!5m2!1spt-BR!2sbr\\\" width=\\\"100%\\\" height=\\\"500\\\" frameborder=\\\"0\\\" allowfullscreen=\\\"allowfullscreen\\\"><\\/iframe><\\/p>\\r\\n<p><strong style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\"><u>Address:<\\/u><\\/strong><br style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\" \\/><span style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\">Keas 69 Str.<\\/span><br style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\" \\/><span style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\">15234, Chalandri<\\/span><br style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\" \\/><span style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\">Athens,<\\/span><br style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\" \\/><span style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\">Greece<\\/span><br style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\" \\/><br style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\" \\/><span style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\">+30-2106019311 (landline)<\\/span><br style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\" \\/><span style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\">+30-6977664062 (mobile phone)<\\/span><br style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\" \\/><span style=\\\"color: #000000; font-family: \'Trebuchet MS\', Tahoma, sans-serif; font-size: 14px;\\\">+30-2106398905 (fax)<\\/span><\\/p>\\r\\n<p>&nbsp;<\\/p>\"}', 'S'),
 (10, 'Tipos de serviços', 'modules-staticcards', '{\"title\":\"is simply dummy text of the printing \",\"subtitle\":\"is simply dummy text\",\"banner\":\"7\",\"text\":null}', 'S'),
 (12, 'Galeria Home', 'modules-imageGallery', '{\"title\":\"Ultimos trabalhos\",\"subtitle\":\"\",\"banner\":\"8\"}', 'S'),
 (19, 'Fique por dentro das novidades', 'modules-informative', '{\"title\":\"Fique por dentro das novidades\",\"subtitle\":\"Et sumi kapa namur aondeai rocus pocus est talaraum \"}', 'S'),
-(21, 'Sessão 2', 'modules-defaultsection', '{\"image\":\"DEFAULT\\/about.png\",\"text\":\"<h2 class=\\\"title\\\">At vero eos et accusamus et iusto<\\/h2>\\r\\n<h4 class=\\\"subtitle\\\">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque<\\/h4>\\r\\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<\\/p>\\r\\n<p><a class=\\\"button btn btn-primary button-primary d-md-inline-block d-block mb-md-0 mb-2 mr-md-2\\\" href=\\\"#\\\">Entre em contato<\\/a><\\/p>\",\"image_position\":\"L\"}', 'S');
+(21, 'Sessão 2', 'modules-defaultsection', '{\"image\":\"DEFAULT\\/about.png\",\"text\":\"<h2 class=\\\"title\\\">At vero eos et accusamus et iusto<\\/h2>\\r\\n<h4 class=\\\"subtitle\\\">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque<\\/h4>\\r\\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<\\/p>\\r\\n<p><a class=\\\"button btn btn-primary button-primary d-md-inline-block d-block mb-md-0 mb-2 mr-md-2\\\" href=\\\"#\\\">Entre em contato<\\/a><\\/p>\",\"image_position\":\"L\"}', 'S'),
+(22, 'Sobre a Empresa', 'modules-texteditor', '{\"text\":\"<p><img src=\\\"http:\\/\\/localhost\\/sistemaphp\\/assets\\/adm\\/img\\/images\\/SLIDE\\/slide1.jpg\\\" alt=\\\"slide1\\\" \\/>&nbsp;<\\/p>\\r\\n<h2 style=\\\"margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; font-family: DauphinPlain; font-size: 24px; line-height: 24px; color: #000000;\\\">What is Lorem Ipsum?<\\/h2>\\r\\n<p style=\\\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify; color: #000000; font-family: \'Open Sans\', Arial, sans-serif; font-size: 14px;\\\"><strong style=\\\"margin: 0px; padding: 0px;\\\">Lorem Ipsum<\\/strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\\/p>\\r\\n<h2 style=\\\"margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; font-family: DauphinPlain; font-size: 24px; line-height: 24px; color: #000000;\\\">Where does it come from?<\\/h2>\\r\\n<p style=\\\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify; color: #000000; font-family: \'Open Sans\', Arial, sans-serif; font-size: 14px;\\\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.<\\/p>\\r\\n<p style=\\\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify; color: #000000; font-family: \'Open Sans\', Arial, sans-serif; font-size: 14px;\\\">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.<\\/p>\\r\\n<p style=\\\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify; color: #000000; font-family: \'Open Sans\', Arial, sans-serif; font-size: 14px;\\\">&nbsp;<\\/p>\\r\\n<h2 style=\\\"margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; font-family: DauphinPlain; font-size: 24px; line-height: 24px; color: #000000;\\\">Why do we use it?<\\/h2>\\r\\n<p style=\\\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify; color: #000000; font-family: \'Open Sans\', Arial, sans-serif; font-size: 14px;\\\">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).<\\/p>\\r\\n<p style=\\\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify; color: #000000; font-family: \'Open Sans\', Arial, sans-serif; font-size: 14px;\\\">&nbsp;<\\/p>\\r\\n<h2 style=\\\"margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; font-family: DauphinPlain; font-size: 24px; line-height: 24px; color: #000000;\\\">Where can I get some?<\\/h2>\\r\\n<p style=\\\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify; color: #000000; font-family: \'Open Sans\', Arial, sans-serif; font-size: 14px;\\\">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.<\\/p>\\r\\n<p style=\\\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify; color: #000000; font-family: \'Open Sans\', Arial, sans-serif; font-size: 14px;\\\">&nbsp;<\\/p>\"}', 'S');
 
 -- --------------------------------------------------------
 
