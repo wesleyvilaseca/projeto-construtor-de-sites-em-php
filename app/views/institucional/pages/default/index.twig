@@ -1,0 +1,7 @@
+{% extends './' ~ theme.root_path_theme ~ '/template.twig' %}
+{% block body %}
+	{% for section in sections %}
+		{{section | raw}}
+	{% endfor %}
+	{{js | raw}}
+{% endblock %}
