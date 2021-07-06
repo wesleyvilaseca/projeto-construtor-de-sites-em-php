@@ -1,11 +1,12 @@
 <div id="header">
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light justify-content-between">
-			<a
-				class="navbar-brand" href="#">
-				{#<img src="{{URL_BASE}}assets/institucional/images/logo.svg" class="img-fluid"/>#}
-				<h1>Meu<span style="color:#fc5185;">Site</span>
-				</h1>
+			<a class="navbar-brand" href="#">
+				{% if brand == 1%}
+					<img src="{{logoimage}}" class="img-fluid" width="120px"/>
+				{% else %}
+					<h1>{{logotext[0]}}<span style="color:#fc5185;">{{logotext[1]}}</span></h1>
+				{% endif %}
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-principal" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<i class="fas fa-bars"></i>

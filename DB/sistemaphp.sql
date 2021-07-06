@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 27-Jun-2021 às 22:14
+-- Tempo de geração: 06-Jul-2021 às 02:39
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.4.9
 
@@ -91,6 +91,9 @@ DROP TABLE IF EXISTS `config_site`;
 CREATE TABLE IF NOT EXISTS `config_site` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `logo` varchar(200) DEFAULT NULL,
+  `sitename1` varchar(100) DEFAULT NULL,
+  `sitename2` varchar(100) DEFAULT NULL,
+  `brand` varchar(1) NOT NULL,
   `favicon` varchar(200) DEFAULT NULL,
   `fone` varchar(100) DEFAULT NULL,
   `address` text,
@@ -98,7 +101,6 @@ CREATE TABLE IF NOT EXISTS `config_site` (
   `port` varchar(100) DEFAULT NULL,
   `user` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
-  `sitename` varchar(100) DEFAULT NULL,
   `homepage_id` int(11) DEFAULT NULL,
   `theme_id` int(11) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -109,8 +111,8 @@ CREATE TABLE IF NOT EXISTS `config_site` (
 -- Extraindo dados da tabela `config_site`
 --
 
-INSERT INTO `config_site` (`id`, `logo`, `favicon`, `fone`, `address`, `host`, `port`, `user`, `password`, `sitename`, `homepage_id`, `theme_id`, `email`) VALUES
-(1, 'LOGOS/FAVICON.png', 'LOGOS/kodetree.jpg', '(91) 9 8820 3132', '<p>Passagem h1 20</p>', '', '', NULL, '', 'Code Tree', 1, 1, 'wesley.vilaseca@hotmail.com');
+INSERT INTO `config_site` (`id`, `logo`, `sitename1`, `sitename2`, `brand`, `favicon`, `fone`, `address`, `host`, `port`, `user`, `password`, `homepage_id`, `theme_id`, `email`) VALUES
+(1, 'LOGOS/kodetree.jpg', 'Code', 'Tree', '2', 'LOGOS/FAVICON.png', '(91) 9 8820 3132', '<p>Passagem h1 20</p>', '', '', NULL, '', 1, 1, 'wesley.vilaseca@hotmail.com');
 
 -- --------------------------------------------------------
 

@@ -5,8 +5,11 @@
 			<div class="row">
 				<div
 					class="col-md-6 align-self-center text-md-left text-center">
-					{#<img src="{{URL_BASE}}assets/institucional/images/logo.svg" class="img-fluid"/>#}
-					<h1>Meu<span style="color:#0d6efd;">Site</span></h1>
+					{% if brand == 1%}
+						<img src="{{logoimage}}" class="img-fluid" width="120px"/>
+					{% else %}
+						<h1>{{logotext[0]}}<span style="color:#fc5185;">{{logotext[1]}}</span></h1>
+					{% endif %}
 				</div>
 				<div class="col-md-6 align-self-center text-right social-media">
 					<ul>

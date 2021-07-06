@@ -101,13 +101,16 @@ class ConfigsiteController extends Controller
 
 
         $config                 = $this->repository;
+        $config->sitename1      = $request['sitename1'];
+        $config->sitename2      = $request['sitename2'];
         $config->logo           = $request['logo'];
         $config->favicon        = $request['favicon'];
+        $config->brand          = $request['brand'];
         $config->fone           = $request['fone'];
         $config->address        = $request['address'];
         $config->host           = $request['host'];
         $config->port           = $request['port'];
-        $config->sitename       = $request['sitename'];
+        
         $config->homepage_id    = $request['homepage_id'];
         $config->theme_id       = $request['theme_id'];
         $config->email          = $request['email'];
@@ -134,13 +137,15 @@ class ConfigsiteController extends Controller
         $request = filterpost($request);
         $request['address'] = $address;
 
+        $item->sitename1      = $request['sitename1'];
+        $item->sitename2      = $request['sitename2'];
         $item->logo           = $request['logo'];
         $item->favicon        = $request['favicon'];
+        $item->brand          = $request['brand'];
         $item->fone           = $request['fone'];
         $item->address        = $request['address'];
         $item->host           = $request['host'];
         $item->port           = $request['port'];
-        $item->sitename       = $request['sitename'];
         $item->homepage_id    = $request['homepage_id'];
         $item->theme_id       = $request['theme_id'];
         $item->email          = $request['email'];

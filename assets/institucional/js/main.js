@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+  favicon();
   //FIXED HEADER
   window.onscroll = function () {
     if (window.pageYOffset > 140) {
@@ -32,3 +33,23 @@ jQuery(document).ready(function ($) {
 });
 
 $('#nav-principal').bootnavbar();
+
+function favicon() {
+  var link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+      obj = { route: base_url + 'institucional-common-header/getfavicon' };
+      var promise = global.rAjax(obj, true, true, false, false);
+      promise.done(function (data) {
+          if (data.success) {
+              let src = data.response.src;
+              link = document.createElement('link');
+              link.rel = 'icon';
+              link.type = 'mage/x-icon';
+              document.getElementsByTagName('head')[0].appendChild(link);
+              if (src)
+                  link.href = src;
+          }
+
+      });
+  }
+}
