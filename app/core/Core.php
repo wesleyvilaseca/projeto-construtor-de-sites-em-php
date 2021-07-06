@@ -57,6 +57,7 @@ class Core
                 array_shift($url);
                 if (isset($url[0])) $this->setMethod($url);
 
+                array_shift($url);
                 if (isset($url[0])) $this->setParam($url);
 
             } else {
