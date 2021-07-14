@@ -180,7 +180,7 @@ class DepartamentController extends Controller
             $exist = $this->repository->find('seo=:seo', "seo={$request['seo']}")->fetch(true);
             if ($exist) {
                 $request['id'] = $id;
-                setmessage(['tipo' => 'warning', 'msg' => 'Já existe uma página com a descrição ' . $request['description'] . ' !']);
+                setmessage(['tipo' => 'warning', 'msg' => 'Já existe uma página com o SEO ' . $request['seo'] . ' !']);
                 setdataform($request);
                 redirect($this->route . 'edit/' . $id);
             } else {
@@ -223,7 +223,7 @@ class DepartamentController extends Controller
 
         $parent_id = new Combo('parent_id', $action == 'delete' ? false :  true);
         $parent_id->addItems($this->repository->getDepartaments());
-        $seo = new Entry('seo', false);
+        $seo = new Entry('seo', $action == 'delete' ? false :  true);
 
         $layout_id = new Combo('layout_id', $action == 'delete' ? false :  true);
         $layout_id->addItems($this->layouts->list());

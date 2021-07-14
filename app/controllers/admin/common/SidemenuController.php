@@ -49,6 +49,25 @@ class SidemenuController extends Controller
                 'url'       => URL_BASE . 'admin-catalog-configsite'
             ]
         ]];
+
+        $this->menu[] = ['menuid' => 'admin-catalog-blog', 'name' => 'Blog', 'icon' => 'fas fa-newspaper', 'children' => [
+            [
+                'menuid'    => 'admin-catalog-blogcategory',
+                'name'      => 'Categorias',
+                'url'       => URL_BASE . 'admin-catalog-blogcategory'
+            ],
+            [
+                'menuid'    => 'admin-catalog-blogarticle',
+                'name'      => 'Artigos',
+                'url'       => URL_BASE . 'admin-catalog-blogarticle'
+            ],
+            [
+                'menuid'    => 'admin-catalog-blogconfig',
+                'name'      => 'Configuração do blog',
+                'url'       => URL_BASE . 'admin-catalog-blogconfig'
+            ]
+        ]];
+
         $this->menuModule();
     }
 

@@ -1,0 +1,52 @@
+{% extends './adm/template.twig' %}
+{% block body %}
+	{{topbar | raw}}
+	{{sidemenu | raw}}
+	<div align="right">
+		<a class="btn btn-primary btn-sm" href="{{addroute}}">
+			<i class="fas fa-plus"></i>
+		</a>
+	</div>
+	<div class="col-xl-12 col-md-12 col-sm-12">
+		<div class="">
+			<div class="info-title-table" align="center">Artigos</div>
+			{% if articles == true %}
+				<div class="info-body-table">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Descrição</th>
+									<th scope="col">Situação</th>
+									<th scope="col">Ação</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for article in articles %}
+									<tr>
+										<td>{{article.title}}</td>
+										<td>{{article.enable == 'S' ? 'Ativo' : 'Inativo' }}</td>
+										<td>
+											<a class="btn btn-info btn-sm" href="{{editroute}}{{article.id}}">
+												<i class="fas fa-pencil-alt"></i>
+											</a>
+											<a class="btn btn-danger btn-sm" href="{{deleteroute}}{{article.id}}">
+												<i class="far fa-trash-alt"></i>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			{% else %}
+				<h5 align="center">
+					Não há registros
+				</h5>
+			{% endif %}
+		</div>
+	</div>
+	{{ paginator | raw}}
+	{{js | raw}}
+{% endblock %}

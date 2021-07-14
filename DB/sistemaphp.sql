@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 06-Jul-2021 às 02:39
+-- Tempo de geração: 13-Jul-2021 às 21:28
 -- Versão do servidor: 5.7.31
--- versão do PHP: 7.4.9
+-- versão do PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -84,6 +84,78 @@ INSERT INTO `banner_image` (`id`, `banner_id`, `title`, `link`, `description`, `
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `blog_articles`
+--
+
+DROP TABLE IF EXISTS `blog_articles`;
+CREATE TABLE IF NOT EXISTS `blog_articles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `blog_category_id` int(11) DEFAULT NULL,
+  `thumb` varchar(500) DEFAULT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `description` varchar(400) DEFAULT NULL,
+  `article` text,
+  `enable` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `blog_articles`
+--
+
+INSERT INTO `blog_articles` (`id`, `blog_category_id`, `thumb`, `title`, `description`, `article`, `enable`) VALUES
+(4, 2, 'GALLERY/8.jpg', 'Lorem ipsum', 'Artigo 1', '<p>Artigo 1 <img src=\"http://localhost/sistemaphp/assets/adm/img/images/paradise.png\" alt=\"paradise\" width=\"192\" height=\"128\" />&nbsp;</p>', 'S'),
+(5, 3, 'GALLERY/6.jpg', 'Lorem ipsum', 'Artigo 2', '<p>Artigo 2</p>', 'S');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `blog_categories`
+--
+
+DROP TABLE IF EXISTS `blog_categories`;
+CREATE TABLE IF NOT EXISTS `blog_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(200) DEFAULT NULL,
+  `enable` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `blog_categories`
+--
+
+INSERT INTO `blog_categories` (`id`, `description`, `enable`) VALUES
+(2, 'Categoria 1', 'S'),
+(3, 'Categoria 2', 'S');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `blog_config`
+--
+
+DROP TABLE IF EXISTS `blog_config`;
+CREATE TABLE IF NOT EXISTS `blog_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `departament_desc` varchar(200) DEFAULT NULL,
+  `header` varchar(1) DEFAULT NULL,
+  `footer` varchar(1) DEFAULT NULL,
+  `articles_per_page` int(11) DEFAULT NULL,
+  `enable` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `blog_config`
+--
+
+INSERT INTO `blog_config` (`id`, `departament_desc`, `header`, `footer`, `articles_per_page`, `enable`) VALUES
+(1, 'blog', 'S', 'S', NULL, 'S');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `config_site`
 --
 
@@ -131,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `departaments` (
   `sort_order` int(11) DEFAULT NULL,
   `enable` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `departaments`
@@ -143,7 +215,8 @@ INSERT INTO `departaments` (`id`, `description`, `top`, `parent_id`, `layout_id`
 (13, 'Sobre a empresa', 'N', 16, 3, 'sobre-a-empresa', 1, 'S'),
 (12, 'Contato', 'S', NULL, 2, 'contato', 3, 'S'),
 (16, 'Quem somos', 'S', NULL, 2, 'quem-somos', 2, 'S'),
-(15, 'Any Sub', 'N', 14, NULL, 'any-sub', 1, 'S');
+(15, 'Any Sub', 'N', 14, NULL, 'any-sub', 1, 'S'),
+(17, 'Blog', 'S', NULL, NULL, 'blog', 5, 'S');
 
 -- --------------------------------------------------------
 

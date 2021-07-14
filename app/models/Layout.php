@@ -12,11 +12,17 @@ class Layout extends DataLayer
     }
 
     public function list() {
+        $blog = new Blogconfig;
         $layouts = $this->find("enable=:enable", "enable=S")->fetch(true);
         $a = [];
         $a['n'] = 'Selecione uma opção';
         foreach($layouts as $layout){
             $a[$layout->id] = $layout->description;
+        }
+
+        $configBlog = $blog->find()->fetch();
+        if($configBlog->enable == "S"){
+            $a[null] = "Blog";
         }
         return $a;
     }

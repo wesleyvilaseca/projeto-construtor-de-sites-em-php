@@ -26,7 +26,7 @@ class Departaments extends DataLayer
                     $i = true;
                     while ($i) {
                         $dad = $this->findById($parentid);
-                        if(!$dad) break;
+                        if (!$dad) break;
                         $departamento = $dad->description . ' > ' . $departamento;
                         if (!$dad->parent_id)
                             break;
@@ -57,14 +57,19 @@ class Departaments extends DataLayer
                 foreach ($childrens as $children) {
                     $children_by_children = $this->find("parent_id=:id and enable=:enable", "id={$children->id}&enable=S")->order("sort_order ASC")->fetch(true);
                     if ($children_by_children) $childrens[$j]->children = $children_by_children;
-                    
+
                     $childrens[$j]->seo = 'page/' . $childrens[$j]->seo;
                     $j++;
                 }
-                
             }
-            $dad_menus[$i]->seo = 'page/' . $dad_menus[$i]->seo;
-            $dad_menus[$i]->children = $childrens;
+            switch ($dad_menus[$i]->seo) {
+                case $dad_menus[$i]->seo == "blog":
+                    $dad_menus[$i]->seo = $dad_menus[$i]->seo;
+                    break;
+                default:
+                    $dad_menus[$i]->seo = 'page/' . $dad_menus[$i]->seo;
+                    $dad_menus[$i]->children = $childrens;
+            }
             $i++;
         }
         return $dad_menus;

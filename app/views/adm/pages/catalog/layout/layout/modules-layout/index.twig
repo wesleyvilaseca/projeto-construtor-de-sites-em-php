@@ -12,33 +12,33 @@
 	</div>
 
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
-		<li class="nav-item" role="presentation">
+		{# <li class="nav-item" role="presentation">
 			<button class="nav-link active" id="esquerda-tab" data-bs-toggle="tab" data-bs-target="#esquerda" type="button" role="tab" aria-controls="esquerda" aria-selected="true">Coluna esquerda</button>
-		</li>
+		</li> #}
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="centro-tab" data-bs-toggle="tab" data-bs-target="#centro" type="button" role="tab" aria-controls="centro" aria-selected="false">Centro</button>
+			<button class="nav-link active" id="centro-tab" data-bs-toggle="tab" data-bs-target="#centro" type="button" role="tab" aria-controls="centro" aria-selected="true">Centro</button>
 		</li>
-		<li class="nav-item" role="presentation">
+		{# <li class="nav-item" role="presentation">
 			<button class="nav-link" id="direita-tab" data-bs-toggle="tab" data-bs-target="#direita" type="button" role="tab" aria-controls="direita" aria-selected="false">Coluna Direita</button>
-		</li>
+		</li> #}
 	</ul>
 
 	<div class="tab-content" id="myTabContent">
-		<div class="tab-pane fade show active" id="esquerda" role="tabpanel" aria-labelledby="equerda-tab">
+		{# <div class="tab-pane fade show active" id="esquerda" role="tabpanel" aria-labelledby="equerda-tab">
 			<div class="col-xl-12 col-md-12 col-sm-12">
 				{{list_leftcol | raw}}
 			</div>
-		</div>
-		<div class="tab-pane fade show" id="centro" role="tabpanel" aria-labelledby="centro-tab">
+		</div> #}
+		<div class="tab-pane fade show active" id="centro" role="tabpanel" aria-labelledby="centro-tab">
 			<div class="col-xl-12 col-md-12 col-sm-12">
 				{{list_center | raw}}
 			</div>
 		</div>
-		<div class="tab-pane fade show" id="direita" role="tabpanel" aria-labelledby="direita-tab">
+		{# <div class="tab-pane fade show" id="direita" role="tabpanel" aria-labelledby="direita-tab">
 			<div class="col-xl-12 col-md-12 col-sm-12">
 				{{list_rightcol | raw}}
 			</div>
-		</div>
+		</div> #}
 	</div>
 	{{js | raw}}
 {% endblock %}

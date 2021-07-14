@@ -59,7 +59,6 @@ class Core
 
                 array_shift($url);
                 if (isset($url[0])) $this->setParam($url);
-
             } else {
                 $this->setDefaultController();
             }
@@ -82,11 +81,16 @@ class Core
             $controller = ucfirst($url[0]);
             switch ($controller) {
                 case "Page":
-                    $controller = 'institucional\\common\\Page';
-                    $this->controller = $controller . "Controller";
+                    $controller         = 'institucional\\common\\Page';
+                    $this->controller   = $controller . "Controller";
+                    break;
+
+                case "Blog":
+                    $controller         = 'institucional\\blog\\Blog';
+                    $this->controller   = $controller . "Controller";
                     break;
                 default:
-                    $this->controller = $controller . "Controller";
+                    $this->controller   = $controller . "Controller";
                     break;
             }
         }
@@ -107,11 +111,12 @@ class Core
     private function setMethod($url)
     {
         $this->metodo = $url[0];
-        array_shift($url); 
+        array_shift($url);
     }
 
-    private function setParam($url){
-        $this->parametros = array_filter($url); 
+    private function setParam($url)
+    {
+        $this->parametros = array_filter($url);
     }
 
     private function getController()

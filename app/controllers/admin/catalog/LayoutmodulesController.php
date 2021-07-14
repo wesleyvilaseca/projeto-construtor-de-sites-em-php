@@ -252,10 +252,10 @@ class LayoutmodulesController extends Controller
         $module_id->addItems($this->module->getmodules());
         $position = new Combo('position', $readyonly);
         $position->addItems([
-            'n' => 'Selecione uma opção',
-            'L' => 'Coluna esquerda',
+            /*'n' => 'Selecione uma opção',
+            'L' => 'Coluna esquerda',*/
             'C' => 'Centro da página',
-            'R' => 'Coluna direita'
+            /*'R' => 'Coluna direita'*/
         ]);
         $sort_order = new Number('sort_order', $readyonly);
         $enable = new Combo('enable', $readyonly);
