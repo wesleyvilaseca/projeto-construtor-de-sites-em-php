@@ -27,10 +27,10 @@
 										<td>{{article.title}}</td>
 										<td>{{article.enable == 'S' ? 'Ativo' : 'Inativo' }}</td>
 										<td>
-											<a class="btn btn-info btn-sm" href="{{editroute}}{{article.id}}">
+											<a class="btn btn-info btn-sm" href="{{editroute}}{{article.id}}{{page ? '?page=' ~ page : ''}}">
 												<i class="fas fa-pencil-alt"></i>
 											</a>
-											<a class="btn btn-danger btn-sm" href="{{deleteroute}}{{article.id}}">
+											<a class="btn btn-danger btn-sm" href="{{deleteroute}}{{article.id}}{{page ? '?page=' ~ page : ''}}">
 												<i class="far fa-trash-alt"></i>
 											</a>
 										</td>

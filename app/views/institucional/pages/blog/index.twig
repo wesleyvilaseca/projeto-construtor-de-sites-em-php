@@ -1,10 +1,74 @@
 {% extends './' ~ theme.root_path_theme ~ '/template.twig' %}
 {% block body %}
 	{{header | raw}}
-	{# {% for section in sections %}
-			{{section | raw}}
-		{% endfor %} #}
-	    blog
+	<div class="container">
+		<div id="title" class="mb-3">
+			<h4>
+				Blog
+			</h4>
+		</div>
+		<div class="row">
+			<div class="col-md-9">
+				{% if articles == true %}
+					{% for article in articles %}
+						<div class="card mb-4">
+							<div class="card-horizontal">
+								{% if article.thumb %}
+									<div class="img-square-wrapper">
+										<img class="thumb" src="{{URL_BASE_IMAGE ~ article.thumb}}" alt="Card image cap">
+									</div>
+								{% endif %}
+
+								<div class="card-body">
+									<h4 class="card-title">{{ article.title }}</h4>
+									<p class="card-text">{{ article.description }}</p>
+									<div id="read-more">
+										<a href="{{URL_BASE}}blog/article/{{article.seo}}{{page ? '?page=' ~ page : ''}}" class="button btn btn-primary button-primary d-md-inline-block d-block mb-md-0 mb-2 mr-md-2">Leia mais...</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				{% else %}
+					<p>
+						Não há artigos publicados</p>
+				{% endif %}
+
+			</div>
+
+			<div class="col-md-3">
+				<div class="card" style="width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title">Categorias</h5>
+						<div class="ms-2">
+							<ul class="list-group">
+								{% for category in categories %}
+									<li class="list-group-item">
+										<a href="{{URL_BASE}}blog/categorysearch/{{category.id}}">{{category.description}}</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{{ paginator | raw}}
+	</div>
+
 	{{footer | raw}}
 	{{js | raw}}
+
+	<style>
+		.thumb {
+			width: 250px;
+			height: 250px;
+		}
+		.card-horizontal {
+			display: flex;
+			flex: 1 1 auto;
+		}
+	</style>
+
 {% endblock %}

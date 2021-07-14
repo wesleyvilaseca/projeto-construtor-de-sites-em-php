@@ -1,0 +1,46 @@
+{% extends './' ~ theme.root_path_theme ~ '/template.twig' %}
+{% block body %}
+	{{header | raw}}
+	<div class="container">
+		{% if breadcrumb %}
+			<div id="breadcrumb">
+				<ol class="breadcrumb">
+					{% for bread in breadcrumb %}
+						{% if bread.active %}
+							<li class="breadcrumb-item active">
+								{{bread.title}}
+							</li>
+						{% else %}
+							<li class="breadcrumb-item">
+								<a href="{{bread.route}}">{{bread.title}}</a>
+							</li>
+						{% endif %}
+					{% endfor %}
+				</ol>
+			</div>
+		{% endif %}
+
+		{% if article.thumb %}
+			<div class="thumb-article" align="center">
+				<img class="thumb-article" src="{{URL_BASE_IMAGE ~ article.thumb}}" alt="{{article.title}}" height="50%">
+			</div>
+		{% endif %}
+
+		<div id="title" class="mt-5 mb-3">
+			<h4>
+				{{ article.title }}
+			</h4>
+		</div>
+
+		<div class="article">
+			{{article.article | raw}}
+		</div>
+
+		{% if gallery == true %}
+			{{ gallery | raw }}
+		{% endif %}
+	</div>
+
+	{{footer | raw}}
+	{{js | raw}}
+{% endblock %}

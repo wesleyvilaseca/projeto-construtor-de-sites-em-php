@@ -34,24 +34,6 @@
 			{% if toptitle %}
 				<h5>{{toptitle}}</h5>
 			{% endif %}
-
-			{% if breadcrumb %}
-				<div id="breadcrumb" class="mt-2">
-					<ol class="breadcrumb">
-						{% for bread in breadcrumb %}
-							{% if bread.active %}
-								<li class="breadcrumb-item active">
-									{{bread.title}}
-								</li>
-							{% else %}
-								<li class="breadcrumb-item">
-									<a href="{{bread.route}}">{{bread.title}}</a>
-								</li>
-							{% endif %}
-						{% endfor %}
-					</ol>
-				</div>
-			{% endif %}
 			{#<hr>#}
 			{% block body %}{% endblock %}
 		</div>

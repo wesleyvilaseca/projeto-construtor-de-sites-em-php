@@ -9,6 +9,7 @@ use app\classes\widgets\form\ImputFile;
 use app\classes\widgets\form\Text;
 use app\classes\widgets\form\wrapper\FormWrapper;
 use app\core\Controller;
+use app\models\Banners;
 use app\models\Blogarticle;
 use app\models\Blogcategory;
 use CoffeeCode\Paginator\Paginator;
@@ -18,17 +19,19 @@ class BlogarticleController extends Controller
     private $repository;
     private $categories;
     private $paginator;
+    private $page;
+    private $imagegallery;
     private $route = URL_BASE . 'admin-catalog-blogarticle/';
 
     public function __construct()
     {
-        $page = filter_input(INPUT_GET, "page", FILTER_SANITIZE_STRIPPED);
+        $this->page = filter_input(INPUT_GET, "page", FILTER_SANITIZE_STRIPPED);
+        $this->imagegallery = new Banners;
         $this->categories   = new Blogcategory;
         $this->repository   = new Blogarticle;
         $this->usuario      = $this->getSession();
         $this->paginator    = new Paginator($this->route . '?page=', "Página", ["Primeira página", "Primeira"], ["Última página", "Última"]);
-        // $this->paginator    = new Paginator($this->route . '?page=');
-        $this->paginator->pager($this->repository->find()->count(), 5, @$page, 2);        
+        $this->paginator->pager($this->repository->find()->count(), 5, $this->page, 2);
     }
 
     public function index()
@@ -45,6 +48,7 @@ class BlogarticleController extends Controller
         $dados['paginator']         = $this->paginator->render();
         $dados['topbar']            = $this->load()->controller('admin-common-topbar');
         $dados['sidemenu']          = $this->load()->controller('admin-common-sidemenu', ['admin-catalog-blog']);
+        $dados['page']              = $this->page;
         $dados['js']                = $this->js();
         $view                       = "adm/pages/catalog/blog/article/index";
         $this->renderView($view, $dados);
@@ -100,12 +104,13 @@ class BlogarticleController extends Controller
         $dados['breadcrumb'][]      = ['route' => URL_BASE . 'admin-catalog-home', 'title' => 'Painel de controle'];
         $dados['breadcrumb'][]      = ['route' => $this->route, 'title' => 'Blog / Artigos', 'active' => true];
         $dados['breadcrumb'][]      = ['route' => '#', 'title' => 'Editar artigo', 'active' => true];
-        $dados['title']             = 'Editar artigo ' . $item->description;
-        $dados["toptitle"]          = 'Editar artigo ' . $item->description;
+        $dados['title']             = 'Editar artigo ' . $item->title;
+        $dados["toptitle"]          = 'Editar artigo ' . $item->title;
         $dados["back"]              = $this->route;
         $dados['form']              = $this->form('update', 'Editar', @getdataform() ?: $item);
         $dados['topbar']            = $this->load()->controller('admin-common-topbar');
         $dados['sidemenu']          = $this->load()->controller('admin-common-sidemenu', ['admin-catalog-blog']);
+        $dados['page']              = $this->page;
         $dados['js']                = $this->js();
         $view                       = "adm/pages/catalog/blog/article/add";
         $this->renderView($view, $dados);
@@ -124,12 +129,13 @@ class BlogarticleController extends Controller
         $dados['breadcrumb'][]      = ['route' => URL_BASE . 'admin-catalog-home', 'title' => 'Painel de controle'];
         $dados['breadcrumb'][]      = ['route' => $this->route, 'title' => 'Blog / Artigos', 'active' => true];
         $dados['breadcrumb'][]      = ['route' => '#', 'title' => 'Remover artigo', 'active' => true];
-        $dados['title']             = 'remover artigo ' . $item->description;
-        $dados["toptitle"]          = 'remover artigo ' . $item->description;
+        $dados['title']             = 'remover artigo ' . $item->title;
+        $dados["toptitle"]          = 'remover artigo ' . $item->title;
         $dados["back"]              = $this->route;
         $dados['form']              = $this->form('delete', 'Remover', @getdataform() ?: $item);
         $dados['topbar']            = $this->load()->controller('admin-common-topbar');
         $dados['sidemenu']          = $this->load()->controller('admin-common-sidemenu', ['admin-catalog-blog']);
+        $dados['page']              = $this->page;
         $dados['js']                = $this->js();
         $view                       = "adm/pages/catalog/blog/article/add";
         $this->renderView($view, $dados);
@@ -142,12 +148,20 @@ class BlogarticleController extends Controller
         $request                    = filterpost($request);
         $request['article']         = $text;
 
+        if (!$request['title'] || !$request['seo'] || !$request['description'] || !$request['article']) {
+            setdataform($request);
+            setmessage(['tipo' => 'warning', 'msg' => 'Os campos com * são de preenchimento obrigatório!']);
+            return redirectBack();
+        }
+
         $article                        = $this->repository;
         $article->thumb                 = $request['thumb'];
         $article->title                 = $request['title'];
+        $article->seo                   = $request['seo'];
         $article->description           = $request['description'];
         $article->blog_category_id      = $request['blog_category_id'];
         $article->article               = $request['article'] ?: '';
+        $article->image_gallery_id      = $request['image_gallery_id'] ?: '';
         $article->enable                = $request['enable'] ?: 'S';
 
         $articleId                      = $article->save();
@@ -160,39 +174,49 @@ class BlogarticleController extends Controller
 
     public function update(string $id)
     {
-
-        if (!$id)
-            redirect($this->route);
+        if (!$id) redirect($this->route);
 
         $item = $this->repository->findById($id);
-        if (!$item)
-            redirect($this->route);
+        if (!$item) redirect($this->route);
+
+        $page = $this->page ? '?page=' . $this->page : null;
+
 
         $request                    = $_POST;
+        if (!$request['title'] || !$request['seo'] || !$request['description'] || !$request['article']) {
+            $request['id'] = $id;
+            setdataform($request);
+            setmessage(['tipo' => 'warning', 'msg' => 'Os campos com * são de preenchimento obrigatório!']);
+            return redirectBack();
+        }
+
         $text                       = $request['article'];
         $request                    = filterpost($request);
         $request['article']         = $text;
 
         $item->thumb                = $request['thumb'];
         $item->title                = $request['title'];
+        $item->seo                  = $request['seo'];
         $item->description          = $request['description'];
         $item->blog_category_id     = $request['blog_category_id'];
         $item->article              = $request['article'] ?: '';
+        $item->image_gallery_id     = $request['image_gallery_id'] ?: '';
         $item->enable               = $request['enable'] ?: 'S';
 
         $itemId                      = $item->save();
         if ($itemId) {
             setdataform($request);
             setmessage(['tipo' => 'success', 'msg' => 'Artigo editado com sucesso']);
-            redirect($this->route);
+            redirect($this->route .  $page);
         }
     }
 
     public function delete(string $id)
     {
         $item = $this->repository->findById($id);
-        if (!$item)
-            redirectBack();
+        if (!$item) redirectBack();
+
+        $page = $this->page ? '?page=' . $this->page : null;
 
         $request    = $_POST;
         if (isset($request))
@@ -201,16 +225,17 @@ class BlogarticleController extends Controller
         $itemId = $item->destroy();
         if ($itemId) {
             setmessage(['tipo' => 'success', 'msg' => 'Artigo removida com sucesso']);
-            redirect($this->route);
+            redirect($this->route . $page);
         } else {
             setmessage(['tipo' => 'warning', 'msg' => 'Ocorreu um erro na requisição']);
-            redirect($this->route);
+            redirect($this->route . $page);
         }
     }
 
 
     private function form(string $action = 'save', string $buttonlabel = "Salvar", object $data = null)
     {
+        $page = $this->page ? '?page=' . $this->page : null;
         $form = new FormWrapper(new Form('articles'));
         $form->setActionInBottom(true);
 
@@ -218,29 +243,38 @@ class BlogarticleController extends Controller
 
         $thumb          = new ImputFile('thumb', $editable);
         $title          = new Entry('title', $editable);
+        $title->setProperty('onfocusout', "blog.methods.seo(value)");
+
+        $seo            = new Entry('seo', $editable);
+        $seo->setProperty('id', 'seo');
         $description    = new Text('description', $editable);
         $category_id    = new Combo('blog_category_id', $editable);
 
         $category_id->addItems($this->categories->getCategoryInArray());
 
         $article    = new Text('article', $editable);
+
+        $image_gallery_id = new Combo('image_gallery_id', $editable);
+        $image_gallery_id->addItems($this->imagegallery->imageGalleryList());
         $enable = new Combo('enable', $editable);
         $enable->addItems([
             'S' => 'Ativo',
             'N' => 'Inativo'
         ]);
-        $form->addField($thumb,         ['label' => 'Thumb *', 'css' => 'mb-4']);
-        $form->addField($title,         ['label' => 'Titulo *', 'css' => 'mb-4']);
-        $form->addField($description,   ['label' => 'Descrição *', 'css' => 'mb-4']);
-        $form->addField($category_id,   ['label' => 'Categoria *', 'css' => 'mb-4']);
-        $form->addField($article,       ['label' => 'Artigo', 'css' => 'mb-4', 'editor' => true]);
-        $form->addField($enable,        ['label' => 'Situação', 'css' => 'mb-4']);
+        $form->addField($thumb,             ['label' => 'Thumb *', 'css' => 'mb-4']);
+        $form->addField($title,             ['label' => 'Titulo *', 'css' => 'mb-4']);
+        $form->addField($seo,               ['label' => 'SEO *', 'css' => 'mb-4']);
+        $form->addField($description,       ['label' => 'Descrição *', 'css' => 'mb-4']);
+        $form->addField($category_id,       ['label' => 'Categoria *', 'css' => 'mb-4']);
+        $form->addField($article,           ['label' => 'Artigo', 'css' => 'mb-4', 'editor' => true]);
+        $form->addField($image_gallery_id,  ['label' => 'Associar uma galeria de imagens a esse artigo?', 'css' => 'mb-4']);
+        $form->addField($enable,            ['label' => 'Situação', 'css' => 'mb-4']);
 
         if ($data) {
-            $form->addAction($buttonlabel,  (object)['css' => 'btn btn-success', 'route' => $this->route . $action . '/' . @$data->id, 'submit' => true]);
+            $form->addAction($buttonlabel,  (object)['css' => 'btn btn-success', 'route' => $this->route . $action . '/' . @$data->id . $page, 'submit' => true]);
             $form->setData($data);
         } else {
-            $form->addAction($buttonlabel, (object)['css' => 'btn btn-success', 'route' => $this->route . $action, 'submit' => true]);
+            $form->addAction($buttonlabel, (object)['css' => 'btn btn-success', 'route' => $this->route . $action . $page, 'submit' => true]);
         }
         return  $form->getForm();
     }
@@ -251,6 +285,7 @@ class BlogarticleController extends Controller
         $js .= $this->bootstrapjs();
         $js .= $this->fancybox_js();
         $js .= $this->tinyEditorActive();
+        $js .= '<script src="' . URL_BASE . 'assets/adm/js/catalog/blog/blog.js" type="text/javascript"></script>';
         return $js;
     }
 }

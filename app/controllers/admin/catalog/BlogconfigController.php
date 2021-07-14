@@ -5,7 +5,6 @@ namespace app\controllers\admin\catalog;
 use app\classes\widgets\form\Combo;
 use app\classes\widgets\form\Entry;
 use app\classes\widgets\form\Form;
-use app\classes\widgets\form\Number;
 use app\classes\widgets\form\wrapper\FormWrapper;
 use app\core\Controller;
 use app\models\Blogconfig;
